@@ -1,0 +1,1465 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MirandasTech · Manual do professor: ensinar pesquisa com os manuais</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+
+:root{
+  --paper:#F1F4F7; --surface:#FFFFFF; --surface-2:#F8FAFB;
+  --ink:#101720; --ink-2:#4A5866; --ink-3:#75828E;
+  --rule:#D3DAE1; --rule-2:#E5EAEF;
+  --blueprint:#17436B; --blueprint-2:#2C6396; --blueprint-soft:#E4EDF5;
+  --signal:#C4530E; --signal-soft:#FBEADD;
+  --go:#186B50; --go-soft:#E0EFE9;
+  --stop:#A0231C; --stop-soft:#F9E5E3;
+  --amber:#8A6000; --amber-soft:#F9EFD6;
+  --shadow:0 1px 2px rgba(16,23,32,.06),0 8px 24px -12px rgba(16,23,32,.18);
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --cond:'IBM Plex Sans Condensed','Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C1218; --surface:#131B23; --surface-2:#182129;
+    --ink:#E3E9EF; --ink-2:#94A3B1; --ink-3:#71808E;
+    --rule:#26313C; --rule-2:#1E2831;
+    --blueprint:#7DB2DF; --blueprint-2:#A3CAEB; --blueprint-soft:#15283A;
+    --signal:#EE8A46; --signal-soft:#33200F;
+    --go:#54C398; --go-soft:#0F2620;
+    --stop:#EC7B72; --stop-soft:#2D1614;
+    --amber:#DCAC3D; --amber-soft:#2A2110;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C1218; --surface:#131B23; --surface-2:#182129;
+  --ink:#E3E9EF; --ink-2:#94A3B1; --ink-3:#71808E;
+  --rule:#26313C; --rule-2:#1E2831;
+  --blueprint:#7DB2DF; --blueprint-2:#A3CAEB; --blueprint-soft:#15283A;
+  --signal:#EE8A46; --signal-soft:#33200F;
+  --go:#54C398; --go-soft:#0F2620;
+  --stop:#EC7B72; --stop-soft:#2D1614;
+  --amber:#DCAC3D; --amber-soft:#2A2110;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--blueprint-2);outline-offset:3px;border-radius:2px}
+
+/* ---------- sections ---------- */
+.part{padding-top:56px}
+.part-head{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--rule);padding-top:14px;margin-bottom:8px}
+.part-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--signal);font-weight:600}
+.part-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+h2{font-family:var(--cond);font-weight:700;font-size:clamp(27px,3.6vw,38px);line-height:1.12;letter-spacing:-.012em;margin:6px 0 0;text-wrap:balance;max-width:22ch}
+h3{font-family:var(--cond);font-weight:600;font-size:22px;line-height:1.25;margin:40px 0 0;color:var(--ink);text-wrap:balance}
+h4{font-family:var(--cond);font-weight:600;font-size:17px;line-height:1.3;margin:26px 0 0;color:var(--blueprint);letter-spacing:.01em}
+p,ul,ol{max-width:68ch}
+p{margin:14px 0 0}
+ul,ol{margin:14px 0 0;padding-left:22px}
+li{margin:7px 0}
+li::marker{color:var(--blueprint)}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+a{color:var(--blueprint);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+code{font-family:var(--mono);font-size:.855em;background:var(--surface-2);border:1px solid var(--rule-2);padding:1px 5px;border-radius:3px;color:var(--ink)}
+.dek{font-size:18px;color:var(--ink-2);max-width:64ch;margin:16px 0 0;line-height:1.6}
+
+/* ---------- blocks ---------- */
+.rule-box,.trap,.case,.note{margin:24px 0 0;padding:16px 20px;border-radius:4px;max-width:74ch;border-left:3px solid}
+.rule-box{background:var(--blueprint-soft);border-left-color:var(--blueprint)}
+.trap{background:var(--signal-soft);border-left-color:var(--signal)}
+.case{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--go)}
+.note{background:var(--surface-2);border-left-color:var(--ink-3)}
+.blabel{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;display:block;margin-bottom:7px}
+.rule-box .blabel{color:var(--blueprint)}
+.trap .blabel{color:var(--signal)}
+.case .blabel{color:var(--go)}
+.note .blabel{color:var(--ink-3)}
+.rule-box p:first-of-type,.trap p:first-of-type,.case p:first-of-type,.note p:first-of-type{margin-top:0}
+.rule-box p,.trap p,.case p,.rule-box li,.trap li,.case li,.note p,.note li{max-width:none;font-size:16px}
+.case .src{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:10px;display:block;line-height:1.5}
+
+/* ---------- figures ---------- */
+figure{margin:34px 0 0;max-width:none}
+figcaption{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);margin-top:11px;line-height:1.5;max-width:76ch}
+figcaption b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--signal);font-weight:600;margin-right:7px}
+.frame{border:1px solid var(--rule);background:var(--surface);border-radius:4px;padding:24px;overflow-x:auto}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:26px 0 0;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--cond);font-size:14.5px;min-width:520px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:11px 14px;border-bottom:1px solid var(--rule);background:var(--surface-2);vertical-align:bottom}
+td{padding:11px 14px;border-bottom:1px solid var(--rule-2);vertical-align:top;line-height:1.45;color:var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+td.mono{font-family:var(--mono);font-size:12.5px}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;font-weight:600;text-transform:uppercase;padding:2.5px 8px;border-radius:20px;white-space:nowrap}
+.p-go{background:var(--go-soft);color:var(--go)}
+.p-amber{background:var(--amber-soft);color:var(--amber)}
+.p-stop{background:var(--stop-soft);color:var(--stop)}
+.p-blue{background:var(--blueprint-soft);color:var(--blueprint)}
+
+/* ---------- terminal ---------- */
+.term{background:#0B1219;border:1px solid #223040;border-radius:5px;overflow:hidden;margin:26px 0 0}
+.term-bar{display:flex;align-items:center;gap:7px;padding:8px 13px;background:#141F2B;border-bottom:1px solid #223040}
+.term-dot{width:9px;height:9px;border-radius:50%;background:#33445A}
+.term-title{font-family:var(--mono);font-size:10.5px;color:#7A8B9C;margin-left:8px;letter-spacing:.05em}
+.term pre{margin:0;padding:15px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.62;color:#C9D6E2}
+.term .c-p{color:#5FA8DC}
+.term .c-o{color:#E8A055}
+.term .c-g{color:#5FC79A}
+.term .c-m{color:#71828F}
+.term .c-r{color:#E8776C}
+
+/* ---------- code ---------- */
+.code{background:var(--surface-2);border:1px solid var(--rule);border-radius:4px;margin:24px 0 0;overflow:hidden}
+.code-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);padding:8px 14px;border-bottom:1px solid var(--rule);background:var(--surface)}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.66;color:var(--ink)}
+.code .k{color:var(--blueprint);font-weight:500}
+.code .s{color:var(--go)}
+.code .cm{color:var(--ink-3);font-style:italic}
+
+/* ---------- charts ---------- */
+.bars{display:flex;flex-direction:column;gap:11px;margin:0}
+.bar-row{display:grid;grid-template-columns:minmax(96px,152px) minmax(0,1fr) 62px;gap:12px;align-items:center}
+.bar-lab{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);line-height:1.25;text-align:right}
+.bar-track{background:var(--rule-2);border-radius:2px;height:22px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;background:var(--blueprint)}
+.bar-fill.f-signal{background:var(--signal)}
+.bar-fill.f-go{background:var(--go)}
+.bar-fill.f-stop{background:var(--stop)}
+.bar-fill.f-amber{background:var(--amber)}
+.bar-fill.f-mute{background:var(--ink-3)}
+.bar-val{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink);text-align:right;font-weight:500}
+.bar-zero{font-family:var(--mono);font-size:11px;color:var(--stop);font-weight:600;position:absolute;left:4px;top:50%;transform:translateY(-50%)}
+@media (max-width:560px){.bar-row{grid-template-columns:minmax(72px,102px) minmax(0,1fr) 52px;gap:8px}.bar-lab{font-size:12px}}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:8px;align-items:center}
+.fstep{border:1px solid var(--rule);background:var(--surface-2);border-radius:4px;padding:12px 18px;text-align:center;width:100%;max-width:640px;position:relative}
+.fstep .fn{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1}
+.fstep .ft{font-family:var(--cond);font-size:13.5px;color:var(--ink-2);margin-top:5px;line-height:1.35}
+.fstep.hl{border-color:var(--signal);background:var(--signal-soft)}
+.fstep.hl .fn{color:var(--signal)}
+.fdrop{font-family:var(--mono);font-size:11.5px;color:var(--stop);text-align:center;line-height:1.4}
+
+/* flow map */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
+.node{border:1px solid var(--rule);border-radius:4px;background:var(--surface-2);padding:12px 13px;display:flex;flex-direction:column;gap:6px}
+.node .nn{font-family:var(--mono);font-size:10px;letter-spacing:.11em;color:var(--ink-3);font-weight:600}
+.node .nt{font-family:var(--cond);font-size:15px;font-weight:600;line-height:1.22;color:var(--ink)}
+.node .nd{font-size:13px;color:var(--ink-2);line-height:1.45;font-family:var(--cond)}
+.node .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.node.gate{border-color:var(--stop);background:var(--stop-soft)}
+.node.gate .nn{color:var(--stop)}
+
+/* two-column compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--surface)}
+.compare>div{padding:18px 20px}
+.compare>div:first-child{border-right:1px solid var(--rule)}
+.cmp-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.compare ul{margin:0;padding-left:18px;max-width:none}
+.compare li{font-family:var(--cond);font-size:14.5px;line-height:1.45;margin:8px 0;color:var(--ink)}
+@media (max-width:640px){.compare{grid-template-columns:1fr}.compare>div:first-child{border-right:0;border-bottom:1px solid var(--rule)}}
+
+/* ui schematic */
+.ui{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--surface);font-family:var(--cond)}
+.ui-bar{background:var(--surface-2);border-bottom:1px solid var(--rule);padding:7px 12px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
+.ui-body{display:grid;grid-template-columns:170px minmax(0,1fr);min-height:150px}
+.ui-side{border-right:1px solid var(--rule);padding:10px;background:var(--surface-2);font-size:13px;color:var(--ink-2)}
+.ui-side div{padding:3.5px 6px;border-radius:3px;line-height:1.3}
+.ui-side div.sel{background:var(--blueprint-soft);color:var(--blueprint);font-weight:600}
+.ui-main{padding:10px}
+.ui-row{display:grid;grid-template-columns:minmax(0,1fr) 78px 46px;gap:9px;padding:6px 7px;border-bottom:1px solid var(--rule-2);font-size:13px;align-items:center;color:var(--ink)}
+.ui-row.head{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule)}
+.ui-row span:nth-child(2),.ui-row span:nth-child(3){font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.schematic-tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);border:1px dashed var(--rule);padding:2px 7px;border-radius:3px}
+@media (max-width:560px){.ui-body{grid-template-columns:1fr}.ui-side{border-right:0;border-bottom:1px solid var(--rule)}}
+
+/* checklist */
+.check{border:1px solid var(--rule);border-radius:4px;background:var(--surface);overflow:hidden}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--rule-2)}
+.check-item:last-child{border-bottom:0}
+.check-item input{margin:4px 0 0;width:16px;height:16px;accent-color:var(--blueprint);flex:none;cursor:pointer}
+.check-item label{font-family:var(--cond);font-size:14.5px;line-height:1.45;cursor:pointer;color:var(--ink)}
+.check-item label b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:2px}
+.check-item.done label{color:var(--ink-3);text-decoration:line-through}
+.check-foot{padding:10px 16px;background:var(--surface-2);border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;color:var(--ink-3);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.check-foot button{font-family:var(--mono);font-size:10.5px;background:none;border:1px solid var(--rule);color:var(--ink-2);padding:3px 10px;border-radius:3px;cursor:pointer;letter-spacing:.05em}
+.check-foot button:hover{border-color:var(--blueprint);color:var(--blueprint)}
+
+/* refs */
+.refs{margin:14px 0 0;padding-left:30px;list-style:decimal;max-width:none}
+.refs li{display:list-item;padding:6px 0 6px 4px;border-bottom:1px solid var(--rule-2);margin:0;font-family:var(--cond);font-size:13.5px;line-height:1.4}
+.refs li::marker{font-family:var(--mono);font-size:11px;color:var(--signal);font-weight:600}
+.refs li a{overflow-wrap:anywhere;font-family:var(--mono);font-size:11px;display:inline-block;margin-top:2px;color:var(--ink-3);text-decoration:none}
+.refs li a:hover{color:var(--blueprint);text-decoration:underline}
+.refs .rt{color:var(--ink);font-weight:500}
+
+.colophon{margin-top:70px;padding-top:22px;border-top:3px solid var(--blueprint);font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.75}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);margin:36px 0 0;display:block;font-weight:600}
+
+
+
+/* ================= motor de slides ================= */
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+body{margin:0}
+.slide{height:100vh;min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:flex-start;padding:26px clamp(64px,6vw,96px) 26px;font-size:15.5px;overflow:hidden;position:relative;border-bottom:1px solid var(--rule-2);background:var(--paper)}
+.slide.alt{background:var(--surface-2)}
+.slide .inner{max-width:none;width:100%;margin:0;max-height:calc(100vh - 52px);overflow:auto;scrollbar-width:thin}
+.slide.fit .inner{overflow:visible}
+.slide h2{max-width:none;font-size:clamp(24px,3.2vw,38px);margin-top:6px}
+.slide .lead{font-size:clamp(15.5px,1.35vw,18px);color:var(--ink-2);max-width:none;margin:10px 0 0;line-height:1.5}
+.slide p,.slide ul,.slide ol,.slide .rule-box,.slide .trap,.slide .case,.slide .note,.slide .more,.slide figcaption,.slide .check,.slide .refs,.slide h2{max-width:none}
+.two{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(16px,2.4vw,34px);align-items:start;margin-top:16px}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.two figure,.two .tw,.two .code,.two .term{margin-top:0}
+.kicker-part{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);font-weight:600}
+.kicker-part span{color:var(--ink-3);font-weight:400;margin-left:10px}
+.more{margin-top:16px;max-width:76ch;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+.more summary{cursor:pointer;font-family:var(--cond);font-weight:600;font-size:14px;padding:10px 14px;color:var(--blueprint);list-style:none;display:flex;align-items:center;gap:8px}
+.more summary::before{content:"+";font-family:var(--mono);width:16px;display:inline-block;text-align:center}
+.more[open] summary::before{content:"–"}
+.more>div{padding:0 16px 14px;font-size:15.5px}
+.more>div p,.more>div li{max-width:none;font-size:15.5px}
+.more .tw{margin-top:10px}
+.bul{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:9px}
+.bul li{position:relative;padding-left:24px;font-size:15.5px;line-height:1.5;margin:0}
+.bul li::before{content:"";position:absolute;left:4px;top:9px;width:10px;height:10px;border-radius:2px;background:var(--blueprint)}
+.bul li.warn::before{background:var(--signal)}
+.bul li.stop::before{background:var(--stop)}
+.bul li.go::before{background:var(--go)}
+
+/* capa */
+.slide.cover{justify-content:center;background:var(--paper)}
+.slide.divider{justify-content:center}
+.brand{font-family:var(--cond);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--blueprint);display:inline-flex;align-items:center;gap:10px}
+.brand::before{content:"";width:22px;height:2px;background:var(--signal)}
+.cover h1{font-family:var(--cond);font-weight:700;font-size:clamp(42px,7.2vw,88px);line-height:.98;letter-spacing:-.02em;margin:22px 0 0;text-wrap:balance;max-width:none}
+.cover .lede{font-size:clamp(18px,1.9vw,23px);color:var(--ink-2);max-width:none;margin:22px 0 0;line-height:1.55}
+.cover-meta{margin-top:34px;display:flex;flex-wrap:wrap;gap:24px 40px;font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+.cover-meta b{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;font-weight:600}
+.cover-meta span{font-family:var(--cond);font-size:15px;color:var(--ink);letter-spacing:0}
+.hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.hint::after{content:"↓";animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* separador de parte */
+.slide.divider{justify-content:center;background:var(--blueprint);color:#F1F4F7;border-bottom:0}
+.slide.divider .kicker-part{color:#F4B07A}
+.slide.divider .kicker-part span{color:rgba(241,244,247,.6)}
+.slide.divider h2{color:#FFFFFF;font-size:clamp(40px,6vw,74px);max-width:none}
+.slide.divider p{color:rgba(241,244,247,.82);font-size:clamp(17px,1.7vw,21px);max-width:none}
+.slide.divider .num{font-family:var(--mono);font-size:clamp(90px,16vw,200px);font-weight:600;color:rgba(255,255,255,.08);position:absolute;right:4vw;bottom:-2vw;line-height:1;letter-spacing:-.04em;pointer-events:none}
+
+/* barra fixa, progresso, navegação */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,3vw,28px);background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);z-index:40}
+.topbar .brand{font-size:12px}
+.topbar .where{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;display:flex;align-items:center;gap:12px}
+.topbar .where b{color:var(--ink);font-weight:600}
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--signal);width:0;z-index:41;transition:width .25s ease}
+.navbtn{position:fixed;left:clamp(8px,1.2vw,18px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:40;align-items:center;opacity:.28;transition:opacity .25s ease}
+.navbtn:hover,.navbtn:focus-within{opacity:1}
+@media (hover:none){.navbtn{opacity:.85}}
+.navbtn .cnt{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:2px}
+.navbtn .cnt b{color:var(--ink)}
+.navbtn button,.menubtn{font-family:var(--mono);font-size:13px;width:42px;height:42px;border-radius:4px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer;box-shadow:var(--shadow);display:inline-flex;align-items:center;justify-content:center}
+.navbtn button:hover,.menubtn:hover{border-color:var(--blueprint);color:var(--blueprint)}
+.menubtn{font-size:16px}
+.menu{position:fixed;inset:0 auto 0 0;width:min(360px,92vw);background:var(--surface);border-right:1px solid var(--rule);box-shadow:var(--shadow);z-index:45;overflow-y:auto;padding:14px 10px 40px;transform:translateX(-102%);transition:transform .28s ease}
+.menu.open{transform:none}
+.menu .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:14px 10px 4px;border-top:1px solid var(--rule-2);margin-top:6px}
+.menu .grp:first-child{border-top:0;margin-top:0}
+.menu a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-family:var(--cond);font-size:14px;padding:6px 10px;border-radius:3px;border-left:2px solid transparent}
+.menu a .n{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);min-width:20px;font-variant-numeric:tabular-nums}
+.menu a:hover{background:var(--blueprint-soft);color:var(--ink)}
+.menu a.on{border-left-color:var(--blueprint);color:var(--blueprint);background:var(--blueprint-soft);font-weight:600}
+.scrim{position:fixed;inset:0;background:rgba(16,23,32,.25);z-index:44;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+
+/* efeitos de entrada — estado de repouso legível; só deslocamento e leve fade */
+.rv{transform:translateY(16px);opacity:.55;transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .55s ease}
+.slide.in .rv{transform:none;opacity:1}
+.slide.in .rv:nth-child(2){transition-delay:.06s}.slide.in .rv:nth-child(3){transition-delay:.12s}.slide.in .rv:nth-child(4){transition-delay:.18s}.slide.in .rv:nth-child(5){transition-delay:.24s}.slide.in .rv:nth-child(6){transition-delay:.30s}
+.slide.cover .rv{transform:none;opacity:1}
+@media (prefers-reduced-motion:reduce){.rv{transform:none;opacity:1;transition:none}.hint::after{animation:none}.prog{transition:none}.menu{transition:none}}
+
+/* figuras leves */
+.shot{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow)}
+.shot img{display:block;width:100%;height:auto}
+.sets{position:relative;height:250px;max-width:520px;margin:0 auto;font-family:var(--cond)}
+.sets div{position:absolute;border-radius:50%;border:1.5px solid var(--rule);display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.3}
+.sets .s1{inset:0;background:var(--surface-2)}
+.sets .s2{inset:12% 15% 8% 15%;background:var(--amber-soft);border-color:var(--amber)}
+.sets .s3{inset:38% 32% 14% 32%;background:var(--signal-soft);border-color:var(--signal);align-items:center;padding:0;font-weight:600;color:var(--signal)}
+.dec{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:20px}
+.dec div{border:1px solid var(--rule);border-radius:4px;padding:12px 14px;background:var(--surface)}
+.dec b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+.dec .h{border-left:3px solid var(--stop)}.dec .h b{color:var(--stop)}
+.dec .p{border-left:3px solid var(--amber)}.dec .p b{color:var(--amber)}
+.dec .m{border-left:3px solid var(--go)}.dec .m b{color:var(--go)}
+.dec ul{margin:0;padding-left:16px;max-width:none}
+.dec li{font-family:var(--cond);font-size:14px;line-height:1.4;margin:4px 0}
+
+/* impressão: um slide por página */
+@page{size:A4 landscape;margin:12mm}
+@media print{
+  html{scroll-snap-type:none}
+  body{background:#fff;color:#101720}
+  .prog,.navbtn,.menubtn,.menu,.scrim,.hint{display:none!important}
+  .slide{min-height:0;height:auto;break-after:page;padding:8mm 4mm;border:0;justify-content:flex-start;overflow:visible}
+  .slide .inner{max-height:none;overflow:visible;zoom:1!important}
+  .slide.divider{background:#17436B!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rv{transform:none;opacity:1}
+  .more{display:block}.more>div{display:block}
+  .term{background:#0B1219!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rule-box,.trap,.case,.note,.pill,.bar-fill,.bar-track,.node,.dec div,.sets div{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .code pre,.term pre{white-space:pre-wrap;word-break:break-word}
+  a{color:inherit;text-decoration:none}
+}
+
+/* limites de altura: um slide por tela */
+.slide .tw{max-height:none;overflow:auto}
+.slide .tw table{font-size:13.5px}
+.slide .tw td,.slide .tw th{padding:8px 11px}
+.slide figure{margin-top:14px}
+.slide .shot img{max-height:34vh;width:auto;max-width:100%;margin:0 auto}
+.slide .code pre,.slide .term pre{max-height:none;overflow:auto;font-size:12px}
+.slide .rule-box,.slide .trap,.slide .case,.slide .note{margin-top:14px;padding:12px 16px}
+.slide .rule-box p,.slide .trap p,.slide .case p,.slide .note p{font-size:14.5px}
+.slide ol,.slide ul{margin-top:10px}
+.slide li{margin:5px 0;font-size:15px}
+.slide h4{margin-top:14px}
+.slide .check{max-height:none}
+.slide .refs{max-height:none}
+.slide .refs li{font-size:13px;padding:6px 0 6px 4px}
+.slide figcaption{font-size:12.5px;margin-top:8px}
+.slide .dec ul{padding-left:14px}.slide .dec li{font-size:13.5px}
+.slide .frame{padding:16px}
+.slide .sets{height:210px}
+@media (max-height:760px){.slide .shot img{max-height:30vh}}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.three figure{margin:0}
+.three .shot img{max-height:none}
+@media (max-width:900px){.three{grid-template-columns:1fr}}
+.slide .node{padding:9px 11px;gap:4px}.slide .node .nt{font-size:14px}.slide .node .nd{font-size:12px}
+
+/* ================= celular e tablet ================= */
+@media (max-width:900px){
+  html{scroll-snap-type:none}
+  .slide{height:auto;min-height:0;overflow:visible;padding:26px 16px 30px;scroll-snap-align:none;font-size:15px}
+  .slide .inner{max-height:none;overflow:visible;zoom:1!important}
+  .slide.cover,.slide.divider{min-height:72vh;padding:40px 18px}
+  .cover h1{font-size:clamp(38px,11vw,60px)}
+  .cover .lede{font-size:17px}
+  .cover-meta{gap:14px 24px}
+  .hint{display:none}
+  .slide h2{font-size:clamp(23px,6.4vw,30px)}
+  .slide .lead{font-size:15.5px}
+  .kicker-part span{display:block;margin-left:0;margin-top:2px}
+  .two,.three{grid-template-columns:minmax(0,1fr);gap:14px}
+  .slide{max-width:100vw;overflow-x:hidden}
+  .slide .inner{min-width:0}
+  .two>*,.three>*{min-width:0}
+  .slide .tw{max-height:none}
+  .slide .tw table{min-width:560px;font-size:13px}
+  .slide .shot img{max-height:none}
+  .slide .code pre,.slide .term pre{max-height:none;font-size:11.5px}
+  .slide .refs,.slide .check{max-height:none}
+  .compare{grid-template-columns:minmax(0,1fr)}.compare>div:first-child{border-right:0;border-bottom:1px solid var(--rule)}
+  .dec{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+  .sets{height:200px}
+  .navbtn{left:auto;right:10px;top:auto;bottom:10px;transform:none;flex-direction:row;gap:6px;padding:6px;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
+  .navbtn button,.menubtn{width:38px;height:38px;box-shadow:none}
+  .navbtn .cnt{margin:0 4px 0 2px}
+  .menu{width:100vw;inset:0 0 0 0}
+  .slide.divider .num{font-size:24vw;right:2vw;bottom:-3vw}
+  .rule-box,.trap,.case,.note{padding:12px 14px}
+}
+@media (max-width:480px){
+  .slide{padding:22px 12px 26px}
+  .plate div,.cover-meta div{width:100%}
+  .bar-row{grid-template-columns:minmax(64px,90px) minmax(0,1fr) 46px;gap:6px}
+  .ui-body{grid-template-columns:1fr}.ui-side{border-right:0;border-bottom:1px solid var(--rule)}
+}
+.gl4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:14px}
+.gl{column-count:1}
+.gl{margin:0;font-family:var(--cond);font-size:12.5px;line-height:1.38;columns:2;column-gap:18px}
+.gl dt{break-inside:avoid}.gl dd{break-inside:avoid}
+@media (max-width:640px){.gl{columns:1}}
+.gl dt{font-weight:600;color:var(--blueprint);margin-top:7px}
+.gl dd{margin:1px 0 0;color:var(--ink-2)}
+
+@media (max-width:640px){.gl4{grid-template-columns:minmax(0,1fr)}}
+.menu-head{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 10px;border-bottom:1px solid var(--rule);margin-bottom:6px}
+.menu-head button{font-family:var(--mono);font-size:20px;line-height:1;width:34px;height:34px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+.menu-head button:hover{border-color:var(--blueprint);color:var(--blueprint)}
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:4vh 4vw;background:rgba(16,23,32,.45)}
+.modal.on{display:flex}
+.modal-box{background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow);max-width:1100px;width:100%;max-height:92vh;display:flex;flex-direction:column}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--rule);font-family:var(--cond);font-weight:600;font-size:15px;color:var(--blueprint)}
+.modal-head button{font-family:var(--mono);font-size:20px;line-height:1;width:34px;height:34px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink-2);cursor:pointer}
+.modal-body{padding:14px 18px 20px;overflow:auto;font-size:15px}
+.modal-body p,.modal-body li{max-width:none;font-size:15px}
+.modal-body .tw{margin-top:10px}.modal-body .two{margin-top:8px}
+.modal-body .shot img{max-height:60vh;width:auto;max-width:100%}
+/* 4) botão de copiar */
+.code,.term{position:relative}
+.copy{position:absolute;top:6px;right:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 8px;border-radius:3px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);cursor:pointer;opacity:.75;z-index:2}
+.copy:hover{opacity:1;border-color:var(--blueprint);color:var(--blueprint)}
+.term .copy{background:#141F2B;border-color:#2B3B4C;color:#9FB1C2}
+.copy.ok{color:var(--go);border-color:var(--go)}
+.gterm{text-decoration:underline dotted var(--blueprint-2);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help}
+.gterm:hover,.gterm:focus{background:var(--blueprint-soft);outline:none;border-radius:2px}
+.gpop{position:fixed;z-index:70;max-width:340px;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-left:3px solid var(--blueprint);border-radius:4px;box-shadow:var(--shadow);padding:10px 12px;font-family:var(--cond);font-size:13.5px;line-height:1.45;display:none;pointer-events:none}
+.gpop.on{display:block}
+.gpop b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--blueprint);margin-bottom:4px}
+@media (hover:none){.gpop{pointer-events:auto}}
+.slide .check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.slide .check .check-foot{grid-column:1/-1}
+.slide .check-item{border-right:1px solid var(--rule-2)}.slide .check-item:nth-child(even){border-right:0}
+.slide .refs{columns:2;column-gap:28px}.slide .refs li{break-inside:avoid}
+#s06 .tw td,#s06 .tw th{padding:6px 10px}
+@media (max-width:900px){.slide .check{grid-template-columns:minmax(0,1fr)}.slide .check-item{border-right:0}.slide .refs{columns:1}}
+
+/* extras deste manual */
+.gantt{display:grid;grid-template-columns:150px repeat(12,minmax(0,1fr));gap:4px 0;font-family:var(--cond);font-size:12.5px;align-items:center}
+.gantt .gl{padding-right:8px;color:var(--ink-2);text-align:right}
+.gantt .gm{font-family:var(--mono);font-size:10px;color:var(--ink-3);text-align:center;border-bottom:1px solid var(--rule);padding-bottom:3px}
+.gantt .gb{height:14px;border-radius:2px;background:var(--blueprint);margin:3px 1px}
+.gantt .gb.s{background:var(--signal)}.gantt .gb.g{background:var(--go)}.gantt .gb.a{background:var(--amber)}
+.cycle{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.cycle .node{align-items:center;text-align:center}
+.struct{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.struct>div{border:1px solid var(--rule);border-radius:4px;background:var(--surface);padding:10px 12px}
+.struct h5{margin:0 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--blueprint)}
+.struct ol,.struct ul{margin:0;padding-left:16px}.struct li{font-family:var(--cond);font-size:13px;line-height:1.35;margin:2px 0}
+@media (max-width:900px){.struct{grid-template-columns:minmax(0,1fr)}.gantt{grid-template-columns:110px repeat(12,minmax(0,1fr))}}
+
+/* lupa: clique na captura para ampliar */
+.shot img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(10,14,20,.88);display:none;align-items:center;justify-content:center;padding:3vh 3vw;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-width:94vw;max-height:88vh;width:auto;height:auto;border-radius:4px;box-shadow:0 12px 40px rgba(0,0,0,.6);background:#fff}
+.lightbox figcaption{position:absolute;left:50%;bottom:1.6vh;transform:translateX(-50%);max-width:90vw;font-family:var(--cond);font-size:13.5px;color:#E3E9EF;text-align:center;line-height:1.4;padding:6px 12px;background:rgba(10,14,20,.6);border-radius:4px}
+.lightbox .lb-close{position:absolute;top:12px;right:14px;width:40px;height:40px;border-radius:4px;border:1px solid rgba(255,255,255,.3);background:rgba(10,14,20,.5);color:#fff;font:20px/1 var(--mono);cursor:pointer}
+.lightbox .lb-hint{position:absolute;top:18px;left:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+@media print{.lightbox{display:none!important}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<div class="scrim" id="scrim"></div>
+<div class="gpop" id="gpop" role="tooltip"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-box"><div class="modal-head"><span id="modal-title">detalhes</span><button type="button" id="modal-close" aria-label="Fechar">×</button></div><div class="modal-body" id="modal-body"></div></div></div>
+<nav class="menu" id="menu" aria-label="Sumário"><div class="menu-head"><span class="brand">MirandasTech</span><button type="button" id="menuclose" aria-label="Fechar sumário">×</button></div><div id="menulist"></div></nav>
+<div class="navbtn"><button class="menubtn" id="menubtn" aria-label="Abrir sumário">☰</button><button id="prev" aria-label="Slide anterior">↑</button><button id="next" aria-label="Próximo slide">↓</button><span class="cnt"><b id="cur">1</b>/<span id="tot">–</span></span></div>
+
+
+<main id="deck">
+<!-- ===================== CAPA ===================== -->
+<section class="slide cover" id="s00" data-title="Capa">
+  <div class="inner">
+    <span class="brand rv">MirandasTech · Manual profissional</span>
+    <h1 class="rv">Manual do professor: ensinar pesquisa com os manuais</h1>
+    <p class="lede rv">Montar uma disciplina de metodologia ou de pesquisa em que <em>o objetivo é a entrega, a aula produz a entrega e a nota confere o arquivo</em>: plano de ensino com cronograma ligado aos manuais, rubricas em que cada critério aponta a evidência, um painel da turma lido das pastas dos projetos, regras de uso de IA e o estágio de docência conforme a Portaria CAPES 76/2010 — <strong>com material CC BY 4.0, scripts rodados de verdade e cada fato datado</strong>.</p>
+    <div class="cover-meta rv">
+      <div><b>Série</b><span>Manuais MirandasTech · pesquisa científica</span></div>
+      <div><b>Versão</b><span>1.0 · setembro de 2026</span></div>
+      <div><b>Formato</b><span><span id="nslides">–</span> slides</span></div>
+      <div><b>Licença</b><span>CC BY 4.0 — cite a fonte</span></div>
+    </div>
+  </div>
+  <div class="hint">role para começar</div>
+</section>
+
+<section class="slide" id="s01" data-title="Para quem é e o que você vai aprender">
+  <div class="inner">
+    <div class="kicker-part rv">Como usar<span>cada slide é uma decisão que você toma para a sua disciplina — o manual sugere; o PPC, o regimento e você decidem</span></div>
+    <h2 class="rv">Para quem é — e o que você vai saber fazer ao final</h2>
+    <p class="lead rv">Este manual é para <strong>quem ensina metodologia ou pesquisa científica</strong>, na graduação ou na pós, e para <strong>pós-graduandos em <span class="gterm" tabindex="0" data-t="Estágio de docência" data-d="Art. 18 da Portaria CAPES 76/2010: formação do pós-graduando para a docência; obrigatório para bolsistas DS; limites de semestres e de 4 h semanais.">estágio de docência</span></strong> (a atividade em que o mestrando ou doutorando dá aula sob supervisão). Ele não ensina a pesquisar — isso é assunto dos manuais irmãos, que o estudante segue como passo a passo. Ele ensina a <em>usar</em> esses manuais como material de uma disciplina: transformar cada fase da pesquisa em uma semana com objetivo, atividade e <span class="gterm" tabindex="0" data-t="Entrega" data-d="O que o estudante produz numa fase e a rubrica confere: BUSCA.md, .bib, PDF, banca.md…">entrega</span>, avaliar pelo arquivo entregue e não pela impressão, e acompanhar a turma sem inventar nada. Tudo o que está aqui foi conferido em páginas públicas em 09/09/2026, sem login; os três scripts foram executados de verdade numa «turma» de pastas fictícias.</p>
+    <div class="two rv">
+      <div>
+        <h4>Ao final, você vai conseguir</h4>
+        <ul class="bul">
+          <li><strong>Escrever</strong> objetivos como entregas, não como «conhecer» — o <span class="gterm" tabindex="0" data-t="Alinhamento construtivo" data-d="Biggs (1996): objetivos, atividades de ensino e avaliação alinhados ao que o estudante deve fazer; o objetivo já diz qual é a entrega.">alinhamento construtivo</span> de Biggs (1996) aplicado a uma disciplina de pesquisa.</li>
+          <li><strong>Usar</strong> os 14 manuais da série como material didático: são <span class="gterm" tabindex="0" data-t="CC BY 4.0" data-d="Creative Commons Atribuição 4.0 Internacional: compartilhar e adaptar para qualquer fim, mesmo comercial, com crédito, link da licença e indicação das mudanças.">CC BY 4.0</span> — copie, adapte, cite.</li>
+          <li><strong>Gerar</strong> o <span class="gterm" tabindex="0" data-t="Plano de ensino" data-d="O documento da disciplina: ementa, objetivos, cronograma, avaliação, bibliografia — o plano_de_ensino.py gera o rascunho.">plano de ensino</span> com <code>plano_de_ensino.py</code>: cronograma de 15 semanas, uma fase por semana, cada uma com manual, atividade e <span class="gterm" tabindex="0" data-t="Entrega" data-d="O que o estudante produz numa fase e a rubrica confere: BUSCA.md, .bib, PDF, banca.md…">entrega</span> — e ajustá-lo ao <span class="gterm" tabindex="0" data-t="PPC" data-d="Projeto Pedagógico do Curso: fixa ementa, carga horária, objetivos e avaliação; prevalece sobre o manual.">PPC</span>.</li>
+          <li><strong>Avaliar</strong> com rubricas geradas por <code>rubrica.py</code>, em que cada critério diz qual arquivo é a <span class="gterm" tabindex="0" data-t="Evidência" data-d="O artefato que prova a entrega — o arquivo, não o relato.">evidência</span>.</li>
+          <li><strong>Ler</strong> o painel da turma (<code>turma_progresso.py</code>): fase atual, fases fechadas e dias parados de cada projeto, lidos do <span class="gterm" tabindex="0" data-t="PROGRESSO.md" data-d="Arquivo de estado do projeto de cada estudante, criado pelo iniciar_projeto.py; lista as 11 fases e marca as fechadas com evidência; o painel o lê.">PROGRESSO.md</span>.</li>
+          <li><strong>Definir</strong> as regras de uso de IA da disciplina (registro, declaração, o que é proibido) e organizar o <span class="gterm" tabindex="0" data-t="Estágio de docência" data-d="Art. 18 da Portaria CAPES 76/2010: formação do pós-graduando para a docência; obrigatório para bolsistas DS; limites de semestres e de 4 h semanais.">estágio de docência</span> conforme o Art. 18 da Portaria CAPES 76/2010.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra central</span><p><strong>O <span class="gterm" tabindex="0" data-t="PPC" data-d="Projeto Pedagógico do Curso: fixa ementa, carga horária, objetivos e avaliação; prevalece sobre o manual.">PPC</span>, o <span class="gterm" tabindex="0" data-t="Regimento" data-d="As normas da instituição ou do programa: calendário, frequência, recuperação, prazos.">regimento</span> e o professor decidem.</strong> Pesos, cronograma, rubricas e painel são sugestões e pontos de partida; a carga horária, o calendário, a forma de avaliação e a recuperação seguem o Projeto Pedagógico do Curso e o <span class="gterm" tabindex="0" data-t="Regimento" data-d="As normas da instituição ou do programa: calendário, frequência, recuperação, prazos.">regimento</span> da sua instituição. Onde este manual diz «20 %», leia «por exemplo, 20 %».</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>A prova de memorização de metodologia.</strong> O estudante decora «pesquisa exploratória, descritiva e explicativa», acerta a prova e nunca fez uma busca reprodutível, uma triagem ou uma análise. Neste manual não há prova: há entregas — e a nota confere o arquivo (Parte 4).</p></div>
+        <div class="note"><span class="blabel">Manuais irmãos</span><p>O estudante segue <a href="https://metodologia.mirandastech.com.br/">Metodologia</a>, <a href="https://manual.mirandastech.com.br/">Uso de IA</a>, <a href="https://busca.mirandastech.com.br/">Busca</a>, <a href="https://zotero.mirandastech.com.br/">Zotero</a>, <a href="https://prisma.mirandastech.com.br/">PRISMA</a>, <a href="https://notebook.mirandastech.com.br/">Notebook</a>, <a href="https://bibliometria.mirandastech.com.br/">Bibliometria</a>, <a href="https://dados.mirandastech.com.br/">Dados</a>, <a href="https://latex.mirandastech.com.br/">LaTeX</a>, <a href="https://git.mirandastech.com.br/">Git</a>, <a href="https://cienciaaberta.mirandastech.com.br/">Ciência aberta</a>, <a href="https://defesa.mirandastech.com.br/">Defesa</a> e <a href="https://plugin.mirandastech.com.br/">Plugin</a>; quem orienta lê o <a href="https://orientador.mirandastech.com.br/">Orientador</a>. Hub: <a href="https://www.mirandastech.com.br/pesquisa">mirandastech.com.br/pesquisa</a>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s02" data-title="Mapa: do PPC à nota com evidência">
+  <div class="inner">
+    <div class="kicker-part rv">Introdução<span>o roteiro do manual segue a ordem em que uma disciplina é montada e dada</span></div>
+    <h2 class="rv">Mapa: do PPC à nota com evidência — e onde cada parte do manual entra</h2>
+    <div class="flow rv">
+      <div class="node"><span class="nn">1</span><span class="nt">PPC e regimento</span><span class="nd">Carga horária, número de semanas, <span class="gterm" tabindex="0" data-t="Nível" data-d="4 Atende com evidência anexada · 3 Atende · 2 Parcial · 1 Não atende; nota = Σ peso × nível/4.">nível</span> (graduação ou pós), forma de avaliação: vêm da instituição, não do manual</span></div>
+      <div class="node"><span class="nn">2</span><span class="nt"><span class="gterm" tabindex="0" data-t="Plano de ensino" data-d="O documento da disciplina: ementa, objetivos, cronograma, avaliação, bibliografia — o plano_de_ensino.py gera o rascunho.">Plano de ensino</span></span><span class="nd"><code>plano_de_ensino.py</code>: <span class="gterm" tabindex="0" data-t="Ementa" data-d="O resumo do conteúdo da disciplina, em uma frase ou parágrafo, que consta do PPC.">ementa</span>, objetivos como entregas, cronograma semana → manual → entrega, avaliação, regras de IA</span></div>
+      <div class="node"><span class="nn">3</span><span class="nt">Semana 1: a pasta</span><span class="nd">Cada estudante cria o projeto com o <code>iniciar_projeto.py</code> do plugin; nasce o <code>PROGRESSO.md</code> que o painel vai ler</span></div>
+      <div class="node"><span class="nn">4</span><span class="nt"><span class="gterm" tabindex="0" data-t="Rubrica" data-d="Tabela critério × nível; no rubrica.py, cada critério tem peso (soma 100) e o arquivo que prova.">Rubrica</span> antes da entrega</span><span class="nd"><code>rubrica.py</code>: critérios com peso, arquivo que prova, quatro níveis — publicada antes, não depois</span></div>
+      <div class="node"><span class="nn">5</span><span class="nt">Aula = oficina</span><span class="nd">O manual aberto, a atividade que produz a entrega; <em><span class="gterm" tabindex="0" data-t="Peer instruction" data-d="Crouch e Mazur (2001): pergunta conceitual, resposta individual, discussão em pares, nova resposta, explicação.">peer instruction</span></em> nas aulas de método</span></div>
+      <div class="node"><span class="nn">6</span><span class="nt">Painel a cada marco</span><span class="nd"><code>turma_progresso.py</code>: quem parou há mais de 14 dias é motivo para conversa, não para nota</span></div>
+      <div class="node gate"><span class="nn">7</span><span class="nt">Nota com <span class="gterm" tabindex="0" data-t="Evidência" data-d="O artefato que prova a entrega — o arquivo, não o relato.">evidência</span></span><span class="nd">Nota = <span class="gterm" tabindex="0" data-t="Rubrica" data-d="Tabela critério × nível; no rubrica.py, cada critério tem peso (soma 100) e o arquivo que prova.">rubrica</span> sobre o arquivo entregue + declaração de uso de IA; recuperação = nova versão com o que mudou</span></div>
+    </div>
+    <div class="two rv">
+      <div class="tw"><table><thead><tr><th style="width:190px">Parte</th><th>O que cobre</th><th style="width:110px">Passos</th></tr></thead><tbody>
+        <tr><td><b>1 Princípios</b></td><td><span class="gterm" tabindex="0" data-t="Alinhamento construtivo" data-d="Biggs (1996): objetivos, atividades de ensino e avaliação alinhados ao que o estudante deve fazer; o objetivo já diz qual é a entrega.">Alinhamento construtivo</span> · <span class="gterm" tabindex="0" data-t="Aprendizagem ativa" data-d="Aula em que o estudante faz — oficina, discussão, exercício — em vez de só ouvir; Freeman et al. (2014) mostram que aumenta o desempenho em ciências, engenharia e matemática.">aprendizagem ativa</span> e <span class="gterm" tabindex="0" data-t="Orientação explícita" data-d="Kirschner, Sweller e Clark (2006): iniciantes precisam de guia passo a passo; descoberta sem guia não funciona. Os manuais são esse guia.">orientação explícita</span> · <span class="gterm" tabindex="0" data-t="Feedback" data-d="Hattie e Timperley (2007): a informação sobre o desempenho que o estudante usa para melhorar; aqui, o comentário «o que muda na próxima versão».">feedback</span> · <em><span class="gterm" tabindex="0" data-t="Peer instruction" data-d="Crouch e Mazur (2001): pergunta conceitual, resposta individual, discussão em pares, nova resposta, explicação.">peer instruction</span></em> · <span class="gterm" tabindex="0" data-t="Integridade (CNPq)" data-d="As diretrizes do CNPq: declarar ferramenta e finalidade da IA; IA não é autoria humana; citações com aspas; obras originais.">integridade</span> e IA</td><td>Passos 2, 5 e 7</td></tr>
+        <tr><td><b>2 A série como material</b></td><td>O hub e os 14 manuais · as capas · o plugin e a pasta do projeto · licença <span class="gterm" tabindex="0" data-t="CC BY 4.0" data-d="Creative Commons Atribuição 4.0 Internacional: compartilhar e adaptar para qualquer fim, mesmo comercial, com crédito, link da licença e indicação das mudanças.">CC BY 4.0</span> e como citar</td><td>Passo 3</td></tr>
+        <tr><td><b>3 O plano de ensino</b></td><td><code>plano_de_ensino.py</code> · cronograma de 15 semanas · adaptar ao PPC · avaliação por entregas · regras de IA</td><td>Passos 1 e 2</td></tr>
+        <tr><td><b>4 Rubricas e painel</b></td><td><code>rubrica.py</code> · as cinco rubricas-modelo · <code>turma_progresso.py</code> · <span class="gterm" tabindex="0" data-t="Feedback" data-d="Hattie e Timperley (2007): a informação sobre o desempenho que o estudante usa para melhorar; aqui, o comentário «o que muda na próxima versão».">feedback</span> em três prioridades</td><td>Passos 4, 6 e 7</td></tr>
+        <tr><td><b>5 Ambientes e estágio de docência</b></td><td>Classroom, Moodle, H5P, LibreOffice, GitHub · Portaria 76/2010, Art. 18 · o pós-graduando em sala</td><td>Passos 3 e 5</td></tr>
+        <tr><td><b>6 Fechar</b></td><td>O plugin · erros comuns · checklist · glossário · referências · como citar</td><td>Todos</td></tr>
+      </tbody></table></div>
+      <div>
+        <div class="rule-box"><span class="blabel">Como ler</span><p>Quem vai montar a disciplina do zero lê em ordem. Quem já tem plano e quer só avaliar melhor vai à Parte 4. Quem é pós-graduando em estágio de docência lê a Parte 5 primeiro — e depois a Parte 3, que é o que vai conduzir em sala.</p></div>
+        <div class="note"><span class="blabel">Convenções</span><p>Nomes de páginas e botões entre «aspas angulares». Capturas em 1920 × 938, feitas em 09/09/2026 sem login. Figuras de terminal: execução real dos scripts, caminho trocado por <code>/home/usuario</code>, turma fictícia (<code>aluna_a</code>, <code>aluno_b</code>…) criada com o <code>iniciar_projeto.py</code>. Nenhuma turma real, nenhum dado de estudante real.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 1 ===================== -->
+<section class="slide divider" id="s03" data-title="Parte 1 · Princípios"><div class="inner"><div class="kicker-part rv">Parte 1<span>Princípios</span></div><h2 class="rv">Alinhamento construtivo; aprendizagem ativa e orientação explícita; feedback que muda a próxima versão; <em>peer instruction</em>; integridade e IA na disciplina</h2><p class="rv">Cinco ideias com fonte verificada no Crossref e nas páginas públicas em 09/09/2026. O manual afirma só o que os títulos e os argumentos dizem — nenhum número de meta-análise é citado aqui, porque não foi conferido no texto integral.</p></div><div class="num">01</div></section>
+
+<section class="slide" id="s04" data-title="Alinhamento construtivo">
+  <div class="inner">
+    <div class="kicker-part rv">Princípios<span>1 de 5 · Biggs (1996), Higher Education, v. 32 · captura de 09/09/2026</span></div>
+    <h2 class="rv">Alinhamento construtivo: o objetivo já diz qual é a entrega — e a aula e a avaliação seguem esse objetivo</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_15_biggs.jpg" width="1920" height="938" alt="Página do artigo Enhancing teaching through constructive alignment na Springer Nature Link: Higher Education, publicado em outubro de 1996, volume 32, páginas 347–364, com o aviso de cookies aberto"></div><figcaption><b>Figura 1</b> A página do artigo de Biggs na Springer Nature Link (captura de 09/09/2026, sem login): «Enhancing teaching through constructive alignment», <em>Higher Education</em>, publicado em outubro de 1996, volume 32, páginas 347–364. O aviso de cookies foi deixado como estava; o manual não aceitou nem rejeitou nada.</figcaption></figure>
+      <div>
+        <p class="lead"><strong>Alinhamento construtivo</strong> é o nome que Biggs (1996) dá a uma disciplina em que <em>objetivos, atividades de ensino e avaliação</em> estão alinhados ao que o estudante deve <em>fazer</em>. Numa disciplina de pesquisa a consequência é direta: o objetivo é escrito como a entrega, a aula é a oficina que produz a entrega, e a avaliação confere a entrega.</p>
+        <div class="compare">
+          <div><div class="cmp-h">Objetivo «conhecer»</div><ul>
+            <li>«Conhecer os tipos de pesquisa e as etapas do método científico»</li>
+            <li>Aula: exposição sobre os tipos; avaliação: prova sobre os tipos</li>
+            <li>Ao final, nenhum estudante tem uma pergunta de pesquisa própria</li>
+          </ul></div>
+          <div><div class="cmp-h">Objetivo = entrega</div><ul>
+            <li>«Um projeto de pesquisa próprio, em fases, com evidência de cada etapa no <code>PROGRESSO.md</code>»</li>
+            <li>Aula: oficina «da ideia à pergunta»; avaliação: a pergunta e os objetivos no <code>PROGRESSO.md</code>, pela rubrica «projeto»</li>
+            <li>Ao final, cada estudante tem projeto, busca, biblioteca, texto e declaração de IA</li>
+          </ul></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Escreva cada objetivo como o arquivo que o estudante entrega. Os quatro objetivos que o <code>plano_de_ensino.py</code> grava são assim: um projeto com evidência de cada fase; buscas reprodutíveis, biblioteca auditada, corpus triado e sintetizado; um resultado analisado (ou uma síntese qualitativa) com figura por script; texto ABNT versionado, com declaração de IA e material depositado. Se um objetivo não cabe nessa forma, ele ainda não é um objetivo — é um tema.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s05" data-title="Aprendizagem ativa e orientação explícita">
+  <div class="inner">
+    <div class="kicker-part rv">Princípios<span>2 de 5 · Freeman et al. (2014), PNAS · Kirschner, Sweller e Clark (2006), Educational Psychologist · DOIs no Crossref</span></div>
+    <h2 class="rv">Aprendizagem ativa e orientação explícita: a aula é oficina, e o manual é o passo a passo que o iniciante precisa</h2>
+    <div class="two rv">
+      <div class="tw"><table><thead><tr><th style="width:230px">Fonte</th><th>O que o título e o argumento dizem</th><th style="width:230px">O que muda na sua disciplina</th></tr></thead><tbody>
+        <tr><td><b>Freeman et al. (2014)</b>, PNAS</td><td>«Active learning increases student performance in science, engineering, and mathematics»: meta-análise; a <span class="gterm" tabindex="0" data-t="Aprendizagem ativa" data-d="Aula em que o estudante faz — oficina, discussão, exercício — em vez de só ouvir; Freeman et al. (2014) mostram que aumenta o desempenho em ciências, engenharia e matemática.">aprendizagem ativa</span> aumenta o desempenho nessas áreas. Este manual afirma só o que o título diz — nenhum número.</td><td>Trocar a exposição sobre «o que é revisão sistemática» pela oficina em que a turma monta a string e roda a busca</td></tr>
+        <tr><td><b>Kirschner, Sweller e Clark (2006)</b>, Educational Psychologist</td><td>«Why Minimal Guidance During Instruction Does Not Work»: iniciantes precisam de <span class="gterm" tabindex="0" data-t="Orientação explícita" data-d="Kirschner, Sweller e Clark (2006): iniciantes precisam de guia passo a passo; descoberta sem guia não funciona. Os manuais são esse guia.">orientação explícita</span>; descoberta sem guia não funciona para quem ainda não tem os esquemas</td><td>Aprendizagem ativa <em>com</em> guia: o manual aberto na tela, passo a passo, é a orientação explícita; a oficina é a atividade</td></tr>
+      </tbody></table></div>
+      <div>
+        <div class="compare">
+          <div><div class="cmp-h">Aula expositiva</div><ul>
+            <li>60 minutos sobre bases de dados, operadores booleanos e truncamento</li>
+            <li>Exercício «para casa»: fazer uma busca — sem modelo, sem registro</li>
+            <li>Entrega: um relato («busquei no Google Acadêmico e achei 40 artigos»)</li>
+          </ul></div>
+          <div><div class="cmp-h">Oficina com o manual</div><ul>
+            <li>10 minutos de contexto; o manual de Busca aberto; cada estudante monta a string por conceitos</li>
+            <li>Em aula: roda em duas bases, anota data e totais no <code>BUSCA.md</code>; o professor circula</li>
+            <li>Entrega: o <code>BUSCA.md</code> com as strings verbatim — a rubrica «busca» confere</li>
+          </ul></div>
+        </div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Ativa <em>e</em> guiada: a oficina não é «descubram como se faz». O manual é o guia explícito (Kirschner, Sweller e Clark); a oficina é onde o estudante faz (Freeman et al.). O papel do professor em aula muda: menos expor, mais circular, destravar e apontar a evidência que falta.</p></div>
+        <div class="note"><span class="blabel">Sem números</span><p>As páginas da PNAS e da <em>Review of Educational Research</em> estavam atrás da Cloudflare em 09/09/2026; as referências foram conferidas pelo Crossref. Por isso este manual não cita o tamanho do efeito de nenhuma meta-análise — só os títulos e os argumentos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s06" data-title="Feedback que muda a próxima versão">
+  <div class="inner">
+    <div class="kicker-part rv">Princípios<span>3 de 5 · Hattie e Timperley (2007), Review of Educational Research · rubrica.py</span></div>
+    <h2 class="rv">Feedback que muda a próxima versão: a rubrica termina com «o que muda», e a recuperação é uma nova versão</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">Hattie e Timperley (2007), em «The Power of Feedback», tratam o <strong>feedback</strong> como a informação que o estudante recebe sobre o próprio desempenho e usa para melhorar. Na disciplina de pesquisa isso tem uma forma concreta: cada rubrica gerada pelo <code>rubrica.py</code> termina com a linha «Comentário ao estudante (o que muda na próxima versão)», e a recuperação prevista no plano é <em>uma nova versão da entrega</em>, com o que mudou e por quê registrado no <code>DECISOES.md</code>.</p>
+        <div class="code"><div class="code-head">exemplo ilustrativo — o comentário no fim de uma rubrica «busca» (não é de um estudante real)</div><pre>Comentário ao estudante (o que muda na próxima versão):
+1. A string da segunda base não está verbatim: cole a string exata e a data (critério 1, BUSCA.md).
+2. O fluxograma dá 212 incluídos, o CONTAGENS.md dá 208: um dos dois está errado — feche os números (critério 4).
+3. Só depois: o título da coleção no Zotero.</pre></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:230px">Feedback que não muda nada</th><th>Feedback que muda a próxima versão</th></tr></thead><tbody>
+          <tr><td>«Bom trabalho, mas pode melhorar»</td><td>«O critério 1 ficou em 2 (Parcial) porque a string da segunda base não está verbatim; cole-a com a data»</td></tr>
+          <tr><td>Nota sem comentário, seis semanas depois</td><td>Nota com o comentário, antes da semana em que a entrega seguinte depende desta</td></tr>
+          <tr><td>Lista de tudo o que está errado, sem ordem</td><td>Três prioridades, na ordem em que valem nota (slide «Feedback em três prioridades»)</td></tr>
+          <tr><td>Correção feita pelo professor no arquivo do estudante</td><td>O que muda é dito; quem muda é o estudante — e registra no <code>DECISOES.md</code></td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Recuperação = nova versão. Não há «prova de recuperação» numa disciplina por entregas: o estudante refaz a entrega com o comentário em mãos, escreve no <code>DECISOES.md</code> o que mudou e por quê, e a rubrica é aplicada de novo. Se o regimento exigir outra forma de recuperação, o regimento vale.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s07" data-title="Peer instruction nas aulas de método">
+  <div class="inner">
+    <div class="kicker-part rv">Princípios<span>4 de 5 · Crouch e Mazur (2001), American Journal of Physics · DOI no Crossref</span></div>
+    <h2 class="rv"><em>Peer instruction</em> para as aulas de método: uma pergunta conceitual, resposta individual, discussão em pares, nova resposta</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">Crouch e Mazur (2001) relatam em «Peer Instruction: Ten years of experience and results» o método em que a aula é pontuada por <strong>perguntas conceituais</strong>: cada estudante responde sozinho, discute com o colega ao lado e responde de novo antes de o professor explicar. Nas semanas de <em>método</em> (Tema → pergunta; Método e desenho; Projeto e ética), em que a entrega é uma decisão e não um arquivo de dados, é o formato que mais rende — porque a discussão em pares é exatamente o «escolhi X porque…; descartei Y porque…» que a rubrica «projeto» vai pedir.</p>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Pergunta conceitual</span><span class="nd">«Esta pergunta é empírica ou não?» «Este desenho é experimental ou observacional?» — com alternativas</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Resposta individual</span><span class="nd">Cada um escolhe sozinho (mão levantada, cartão, formulário do <span class="gterm" tabindex="0" data-t="LMS" data-d="Learning Management System, o ambiente virtual de aprendizagem: Moodle (livre, GPL), Google Sala de Aula.">LMS</span>)</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Pares</span><span class="nd">Dois minutos para convencer o colega — quem discorda explica o porquê</span></div>
+          <div class="node gate"><span class="nn">4</span><span class="nt">Nova resposta e explicação</span><span class="nd">Vota-se de novo; só então o professor explica, a partir das razões que ouviu</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Semana do cronograma</th><th>Pergunta conceitual que funciona em pares</th></tr></thead><tbody>
+          <tr><td><b>2 · Tema → problema → pergunta</b></td><td>Entre três formulações do mesmo tema, qual é uma pergunta empírica, delimitada e viável? Qual é só um tema?</td></tr>
+          <tr><td><b>3 · Método e desenho</b></td><td>Dado um resumo, o estudo é experimental, observacional ou de revisão? O que na descrição decide?</td></tr>
+          <tr><td><b>4 · Projeto e ética</b></td><td>Este projeto precisa de comitê de ética e TCLE? O que na pergunta e nos dados decide?</td></tr>
+          <tr><td><b>7 · Triagem</b></td><td>Diante de um título e resumo, inclui ou exclui — e qual critério do codebook justifica?</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A pergunta conceitual tem de ter <em>razões</em> em disputa, não uma definição a lembrar. «Qual é o conceito de hipótese?» não gera discussão; «esta frase é uma hipótese testável?» gera. O manual de Metodologia (slides 7–16) traz os exemplos de pergunta, problema e desenho que servem de base.</p></div>
+        <div class="note"><span class="blabel">O que este manual não afirma</span><p>Os ganhos numéricos relatados por Crouch e Mazur não são citados aqui: só o método, como o título o descreve.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s08" data-title="Integridade e IA na disciplina">
+  <div class="inner">
+    <div class="kicker-part rv">Princípios<span>5 de 5 · CNPq, Diretrizes de integridade · Leiden/DORA · captura de 09/09/2026</span></div>
+    <h2 class="rv">Integridade e IA na disciplina: a regra do CNPq é a regra da sala — declarar a ferramenta e a finalidade; IA não é autoria humana</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_18_cnpq_integridade.jpg" width="1920" height="938" alt="Página Diretrizes da Comissão de Integridade na Atividade Científica do CNPq, com os itens I a) a d) sobre ética, cultura de integridade, declaração do uso de IA generativa e vedação de submeter conteúdo gerado por IA como autoria humana"></div><figcaption><b>Figura 2</b> As «Diretrizes de integridade na pesquisa apoiada pelo CNPq» (captura de 09/09/2026, sem login): entre os itens visíveis, declarar o uso de ferramentas de Inteligência Artificial Generativa «em qualquer fase do desenvolvimento da pesquisa», especificando «a ferramenta utilizada e a finalidade», e a vedação de submeter conteúdo gerado por IA «como se fosse de autoria humana». O aviso de cookies foi deixado como estava.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:250px">Regra herdada</th><th>Na disciplina vira</th></tr></thead><tbody>
+          <tr><td><b>Declarar a ferramenta e a finalidade</b> (<span class="gterm" tabindex="0" data-t="Integridade (CNPq)" data-d="As diretrizes do CNPq: declarar ferramenta e finalidade da IA; IA não é autoria humana; citações com aspas; obras originais.">CNPq</span>)</td><td>Registro em <code>USO_DE_IA.csv</code> (ferramenta, fase, finalidade, validação) e declaração no texto — parte da última entrega</td></tr>
+          <tr><td><b>IA não é autoria humana</b> (<span class="gterm" tabindex="0" data-t="Integridade (CNPq)" data-d="As diretrizes do CNPq: declarar ferramenta e finalidade da IA; IA não é autoria humana; citações com aspas; obras originais.">CNPq</span>)</td><td>Assinar texto gerado como próprio é infração de <span class="gterm" tabindex="0" data-t="Integridade (CNPq)" data-d="As diretrizes do CNPq: declarar ferramenta e finalidade da IA; IA não é autoria humana; citações com aspas; obras originais.">integridade</span>, não «uso de IA»; o estudante responde pelo conteúdo</td></tr>
+          <tr><td><b>Citações com aspas; obras originais</b> (CNPq)</td><td>Resumir fonte que não leu é proibido; a matriz de síntese (semana 8) exige a página de onde veio cada trecho</td></tr>
+          <tr><td><b>Não avaliar pessoas por métricas</b> (<span class="gterm" tabindex="0" data-t="Leiden/DORA" data-d="Regra herdada dos manuais irmãos: não avaliar pessoas por métricas — nem na pesquisa, nem na nota.">Leiden/DORA</span>)</td><td>A nota é pela rubrica sobre o artefato; número de páginas, de referências ou de «commits» não é critério</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A disciplina não inventa uma política de IA: ela herda a do CNPq e a do manual de Uso de IA, e diz como se cumpre — quando se registra, onde se declara, o que é proibido (slide «Regras de uso de IA na disciplina»). Punir com base em «<span class="gterm" tabindex="0" data-t="Detector de IA" data-d="Ferramenta que estima se um texto foi gerado por IA; não é prova e não fundamenta nota nem sanção.">detector de IA</span>» não cabe: detector não é prova (Parte 3).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 2 ===================== -->
+<section class="slide divider" id="s09" data-title="Parte 2 · A série como material"><div class="inner"><div class="kicker-part rv">Parte 2<span>A série como material</span></div><h2 class="rv">O hub e os 14 manuais; as capas; o plugin e a pasta do projeto; licença CC BY 4.0 e como citar</h2><p class="rv">O material didático já existe e é livre: cada manual da série cobre uma fase da pesquisa como passo a passo, com capturas datadas e scripts. Aqui, o que cada um entrega ao seu cronograma, como o estudante organiza a pasta do projeto e como você reutiliza tudo com <span class="gterm" tabindex="0" data-t="Atribuição" data-d="O crédito exigido pela CC BY: autor, título, série, versão, data e licença — «MATIAS, J. P. M. &lt;título&gt;. MirandasTech, v1.0, set. 2026.»">atribuição</span>.</p></div><div class="num">02</div></section>
+
+<section class="slide alt" id="s10" data-title="O hub: por onde começar">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>1 de 6 · mirandastech.com.br/pesquisa · captura de 09/09/2026</span></div>
+    <h2 class="rv">O hub: «Manuais, repositórios e ferramentas para cada etapa da sua pesquisa» — e os cinco passos de «Por onde começar»</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_01_hub_pesquisa.jpg" width="1920" height="938" alt="Hub de pesquisa científica MirandasTech: título Sua pesquisa. Mais conectada. Mais longe., campo de busca e a seção Por onde começar com cinco passos numerados"></div><figcaption><b>Figura 3</b> O hub de pesquisa científica (captura de 09/09/2026, sem login): «Sua pesquisa. Mais conectada. Mais longe.» e «Manuais, repositórios e ferramentas para cada etapa da sua pesquisa». A seção «Por onde começar» lista cinco passos, cada um ligado a um manual: Decida o método (Metodologia), Delegue com critério (IA na Pesquisa), Registre as fontes (Zotero), Leia e sintetize (Gemini Notebook), Conecte as etapas (Plugin Pesquisador).</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Passo do hub</th><th>Manual</th><th>Na disciplina</th></tr></thead><tbody>
+          <tr><td><b>1 Decida o método</b></td><td>Metodologia</td><td>Semanas 2 a 4: pergunta, desenho, projeto</td></tr>
+          <tr><td><b>2 Delegue com critério</b></td><td>Uso de IA na pesquisa</td><td>Semana 1 (acordo de uso de IA) e semana 15 (declaração)</td></tr>
+          <tr><td><b>3 Registre as fontes</b></td><td>Zotero</td><td>Semana 6: biblioteca auditada e <code>.bib</code></td></tr>
+          <tr><td><b>4 Leia e sintetize</b></td><td>Gemini Notebook</td><td>Semana 8: fichamento com página e matriz de síntese</td></tr>
+          <tr><td><b>5 Conecte as etapas</b></td><td>Plugin Pesquisador</td><td>Da semana 1 à 15: a pasta, o <code>PROGRESSO.md</code>, o painel</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O hub é a porta de entrada do estudante; no seu <span class="gterm" tabindex="0" data-t="LMS" data-d="Learning Management System, o ambiente virtual de aprendizagem: Moodle (livre, GPL), Google Sala de Aula.">LMS</span> (Moodle, Google Sala de Aula) cada semana leva o link do manual e dos slides que a semana usa, não uma cópia. Assim o estudante sempre abre a versão datada mais recente, e a <span class="gterm" tabindex="0" data-t="Atribuição" data-d="O crédito exigido pela CC BY: autor, título, série, versão, data e licença — «MATIAS, J. P. M. &lt;título&gt;. MirandasTech, v1.0, set. 2026.»">atribuição</span> fica automática.</p></div>
+        <div class="note"><span class="blabel">Vocabulário</span><p>LMS é o ambiente virtual de aprendizagem — o Moodle, o Google Sala de Aula. «Manual» aqui é um conjunto de slides com capturas datadas, scripts e checklist, publicado num subdomínio próprio e em PDF; «hub» é a página que reúne todos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s11" data-title="Os 14 manuais: manual, fase e entrega">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>2 de 6 · rodapé do hub · plano_de_ensino.py (cronograma padrão) · 09/09/2026</span></div>
+    <h2 class="rv">Os 14 manuais irmãos: qual fase do cronograma cada um cobre e o que o estudante entrega com ele</h2>
+    <div class="tw rv"><table><thead><tr><th style="width:250px">Manual</th><th style="width:150px">Semana(s)</th><th>Fase do cronograma padrão</th><th>O que o estudante entrega (evidência)</th></tr></thead><tbody>
+      <tr><td><b>Uso de IA na pesquisa</b> · manual.mirandastech.com.br</td><td>1 e 15</td><td>Diagnóstico e pasta; Entrega e declaração</td><td>Acordo de uso de IA; <code>USO_DE_IA.csv</code>; declaração de IA</td></tr>
+      <tr><td><b>Plugin</b> · plugin.mirandastech.com.br</td><td>1 e 15</td><td>Diagnóstico e pasta; Entrega</td><td><code>PROGRESSO.md</code> criado; <code>RELATORIO_ORIENTADOR.md</code></td></tr>
+      <tr><td><b>Metodologia</b> · metodologia.mirandastech.com.br</td><td>2, 3 e 4</td><td>Tema → problema → pergunta; Método e desenho; Projeto e ética</td><td>Pergunta e objetivos; frase «escolhi X porque…; descartei Y porque…»; <code>PROJETO.md</code></td></tr>
+      <tr><td><b>Ciência aberta</b> · cienciaaberta.mirandastech.com.br</td><td>4 e 13</td><td>Projeto e ética; Versão e publicação</td><td><code>PREREGISTRO.md</code>; plano de gestão de dados; depósito (<code>.zenodo.json</code>)</td></tr>
+      <tr><td><b>Busca em bases</b> · busca.mirandastech.com.br</td><td>5</td><td>Busca em bases</td><td><code>BUSCA.md</code> com strings verbatim, data e totais</td></tr>
+      <tr><td><b>Zotero</b> · zotero.mirandastech.com.br</td><td>6</td><td>Biblioteca no Zotero</td><td>Auditoria sem erro; <code>.bib</code> exportado</td></tr>
+      <tr><td><b>Revisão sistemática com PRISMA</b> · prisma.mirandastech.com.br</td><td>7</td><td>Triagem e revisão sistemática</td><td><code>CONTAGENS.md</code>; fluxograma PRISMA</td></tr>
+      <tr><td><b>Gemini Notebook</b> · notebook.mirandastech.com.br</td><td>8</td><td>Leitura e síntese</td><td>Matriz de síntese conferida, com página de cada trecho</td></tr>
+      <tr><td><b>Bibliometria</b> · bibliometria.mirandastech.com.br</td><td>9</td><td>Bibliometria do campo</td><td><code>indicadores.md</code>; mapa de termos aberto no VOSviewer Online</td></tr>
+      <tr><td><b>Análise de dados</b> · dados.mirandastech.com.br</td><td>10 e 11</td><td>Dados: limpeza e análise; Qualitativo com o Taguette</td><td>Relatório de limpeza; resultado com efeito e IC; codebook; <code>sintese.md</code></td></tr>
+      <tr><td><b>LaTeX com Overleaf e abnTeX2</b> · latex.mirandastech.com.br</td><td>12</td><td>Escrita em LaTeX/ABNT</td><td>PDF sem «??»; <code>checar_citacoes.py</code> sem erro</td></tr>
+      <tr><td><b>Git e GitHub</b> · git.mirandastech.com.br</td><td>13</td><td>Versão e publicação</td><td>Repositório auditado; README, LICENSE, <code>CITATION.cff</code></td></tr>
+      <tr><td><b>Defesa e qualificação</b> · defesa.mirandastech.com.br</td><td>14</td><td>Pré-banca</td><td><code>banca.md</code>; <code>ensaio.csv</code></td></tr>
+      <tr><td><b>Orientador</b> · orientador.mirandastech.com.br</td><td>—</td><td>Transversal: para quem orienta os projetos</td><td>Leitura do professor e do supervisor do estágio, não do estudante</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="slide alt" id="s12" data-title="Capas: Metodologia e Uso de IA">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>3 de 6 · metodologia.mirandastech.com.br · manual.mirandastech.com.br · capturas de 09/09/2026</span></div>
+    <h2 class="rv">As capas dizem tudo o que a citação precisa: título, versão, data, formato e licença — Metodologia e Uso de IA</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_02_manual_metodologia.jpg" width="1920" height="938" alt="Capa do manual Metodologia da pesquisa científica: título, lede sobre decidir cada etapa com critério e deixá-la defensável diante de uma banca, e os campos autor, versão, formato (55 slides) e licença CC BY 4.0"></div><figcaption><b>Figura 4</b> A capa do manual de Metodologia (captura de 09/09/2026, sem login): «Do tema ao problema, do problema ao método, do método ao texto: o que decidir em cada etapa, com que critério, e como deixar cada decisão defensável diante de uma banca». Formato: 55 slides; licença CC BY 4.0. É o manual das semanas 2 a 4 — e das perguntas de <em>peer instruction</em>.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/pr_03_manual_ia.jpg" width="1920" height="938" alt="Capa do manual Uso de IA na pesquisa científica: título, lede sobre o que delegar a um modelo e como provar depois qual foi qual, e os campos autor, versão, formato (63 slides) e licença CC BY 4.0"></div><figcaption><b>Figura 5</b> A capa do manual de Uso de IA (captura de 09/09/2026, sem login): «o que delegar a um modelo, o que manter com o pesquisador, como configurar cada ferramenta e — a parte que quase todo tutorial pula — como provar depois qual foi qual». Formato: 63 slides; licença CC BY 4.0. É a fonte das regras de IA da disciplina (semanas 1 e 15).</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A versão e a data que entram na citação são as da capa do manual no dia em que você o adota — os manuais são atualizados e a capa muda. Copie os quatro campos (versão, data, formato, licença) para a bibliografia do plano e para o cabeçalho do material adaptado.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Como usar em aula</span><p>Não é preciso projetar os 55 slides: o cronograma indica a faixa (Metodologia 7–9 na semana 2; 12–16 na 3; 25–28 na 4). O estudante lê a faixa antes, e a aula é a oficina sobre ela.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s13" data-title="Capas: Plugin e Zotero">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>4 de 6 · plugin.mirandastech.com.br · zotero.mirandastech.com.br · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Plugin e Zotero: o pacote que organiza as fases e o gerenciador de referências que a semana 6 exige</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_04_manual_plugin.jpg" width="1920" height="938" alt="Capa do manual Plugin Pesquisa MirandasTech para Claude e Codex: passo a passo, com a lede sobre instalar, criar a pasta do projeto e conduzir as onze fases com o Pesquisador, o Metodólogo, o Orientador e o Bibliotecário; formato 45 slides"></div><figcaption><b>Figura 6</b> A capa do manual do Plugin (captura de 09/09/2026, sem login): instalar, «criar a pasta do projeto; conduzir as onze fases com o Pesquisador, o Metodólogo, o Orientador e o Bibliotecário» — «um pacote que roda no seu computador e só fecha uma fase com evidência». Formato: 45 slides; licença CC BY 4.0.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/pr_20_manual_zotero.jpg" width="1920" height="938" alt="Capa do manual Zotero para pesquisa científica: passo a passo, com a lede sobre instalar, capturar, organizar, ler, citar, exportar e colaborar; formato 57 slides"></div><figcaption><b>Figura 7</b> A capa do manual de Zotero (captura de 09/09/2026, sem login): «Instalar, capturar, organizar, ler, citar, exportar e colaborar — com o gerenciador de referências livre que mantém texto e lista de referências sincronizados até a última versão». Formato: 57 slides; licença CC BY 4.0. É o manual da semana 6 (biblioteca auditada e <code>.bib</code>).</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Os dois são pré-requisito de quase tudo o que vem depois: sem a pasta do plugin não há <code>PROGRESSO.md</code> para o painel ler; sem o Zotero não há <code>.bib</code> para o LaTeX nem auditoria para a rubrica «busca». Por isso ficam na semana 1 e na semana 6, e não «quando der».</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Rascunho</span><p>A capa do manual do Plugin traz «1.0 (rascunho)» na versão em 09/09/2026: ao adotá-lo, confira a capa de novo e cite a versão que estiver lá.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s14" data-title="O plugin e a pasta do projeto">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>5 de 6 · github.com/joaopaulomirandamatias/pesquisa-mirandastech · captura de 09/09/2026</span></div>
+    <h2 class="rv">O plugin e a pasta do projeto: <code>iniciar_projeto.py</code> cria a pasta com o <code>PROGRESSO.md</code>; o Pesquisador só fecha uma fase com evidência</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_19_repo_plugin.jpg" width="1920" height="938" alt="Repositório público pesquisa-mirandastech no GitHub, com as pastas agents, commands, docs, evals, exemplos, hooks, manual, modelos e scripts, uma release e a descrição do plugin para Claude Code e Codex"></div><figcaption><b>Figura 8</b> O repositório público do plugin no GitHub (captura de 09/09/2026, sem login): «Plugin Pesquisa MirandasTech para Claude Code e Codex: o Pesquisador conduz a pesquisa por fases com Metodólogo, Orientador de uso de IA, Bibliotecário do Zotero e leitura com Gemini Notebook». Pastas visíveis: <code>agents</code>, <code>commands</code>, <code>hooks</code>, <code>scripts</code>, <code>manual</code>, <code>modelos</code>, <code>exemplos</code>, <code>evals</code>, <code>docs</code>; uma <em>release</em> publicada.</figcaption></figure>
+      <div>
+        <p class="lead">O <strong>plugin</strong> é um pacote instalável no Claude Code e no Codex que põe os papéis dos manuais dentro do assistente: o <strong>Pesquisador</strong> (gerente das fases), o <strong>Metodólogo</strong>, o <strong>Orientador</strong> (uso de IA) e o <strong>Bibliotecário</strong> (Zotero). O <code>iniciar_projeto.py</code> cria a pasta do projeto do estudante com o <code>PROGRESSO.md</code> — o arquivo de estado que lista as 11 fases e marca as fechadas. Uma fase só fecha com evidência; o estudante decide sempre. É esse arquivo, um por estudante, que o <code>turma_progresso.py</code> (Parte 4) lê.</p>
+        <div class="tw"><table><thead><tr><th style="width:60px">Fase</th><th>Nome</th><th style="width:60px">Fase</th><th>Nome</th></tr></thead><tbody>
+          <tr><td class="num">0</td><td>Diagnóstico</td><td class="num">6</td><td>Leitura e síntese</td></tr>
+          <tr><td class="num">1</td><td>Pergunta</td><td class="num">7</td><td>Análise</td></tr>
+          <tr><td class="num">2</td><td>Método</td><td class="num">8</td><td>Escrita ABNT</td></tr>
+          <tr><td class="num">3</td><td>Projeto e ética</td><td class="num">9</td><td>Pré-banca</td></tr>
+          <tr><td class="num">4</td><td>Busca e biblioteca</td><td class="num">10</td><td>Entrega</td></tr>
+          <tr><td class="num">5</td><td>Triagem</td><td></td><td></td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Semana 1 é a semana da pasta: cada estudante roda o <code>iniciar_projeto.py</code> na própria máquina e entrega o <code>PROGRESSO.md</code> criado. As 15 semanas do cronograma (Parte 3) desdobram essas 11 fases — a fase 4 vira as semanas 5 e 6, a fase 7 vira as semanas 9 a 11 — sem mudar o arquivo que o painel lê.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s15" data-title="Licença CC BY 4.0 e como citar">
+  <div class="inner">
+    <div class="kicker-part rv">A série como material<span>6 de 6 · creativecommons.org/licenses/by/4.0 (deed em português) · captura de 09/09/2026</span></div>
+    <h2 class="rv">Licença CC BY 4.0: compartilhar e adaptar «para qualquer fim, mesmo que comercial» — com crédito, link da licença e indicação das mudanças</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_09_cc_by.jpg" width="1920" height="938" alt="Deed da licença CC BY 4.0 em português brasileiro: Atribuição 4.0 Internacional, URL canônica creativecommons.org/licenses/by/4.0, e o início da seção Você tem o direito de: Compartilhar"></div><figcaption><b>Figura 9</b> O <em>deed</em> da licença em português (captura de 09/09/2026, sem login): «CC BY 4.0 — Atribuição 4.0 Internacional»; URL canônica creativecommons.org/licenses/by/4.0/; «Você tem o direito de: Compartilhar — copiar e redistribuir o material em qualquer suporte ou formato para qualquer fim, mesmo que comercial». Todos os manuais da série usam esta licença.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:200px">Você pode</th><th>Desde que</th></tr></thead><tbody>
+          <tr><td><b>Compartilhar</b> — copiar e redistribuir em qualquer suporte, para qualquer fim, mesmo comercial</td><td><b>Dê crédito</b>: autor, título, série, versão e data</td></tr>
+          <tr><td><b>Adaptar</b> — remixar, transformar, criar a partir do material (cortar slides, traduzir, montar um H5P)</td><td><b>Aponte a licença</b>: «CC BY 4.0» com o link</td></tr>
+          <tr><td>Usar num LMS, num PDF de aula, numa apostila da instituição</td><td><b>Indique as mudanças</b>: «adaptado de…», com o que foi cortado ou alterado</td></tr>
+        </tbody></table></div>
+        <div class="code"><div class="code-head">como citar cada manual — e um exemplo de atribuição num slide adaptado (exemplo ilustrativo)</div><pre>MATIAS, J. P. M. &lt;título do manual&gt;. MirandasTech, v1.0, set. 2026. CC BY 4.0.
+# a versão e a data são as da capa do manual no dia em que você o adota
+
+Adaptado de: MATIAS, J. P. M. Metodologia da pesquisa científica. MirandasTech, v1.0, set. 2026.
+CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/ — mudanças: slides 30–55 omitidos;
+exemplos trocados pelos da área da disciplina.</pre></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Copiar um manual sem citar é o único uso que a licença não permite — e é o erro mais fácil de evitar: uma linha no rodapé do slide, na bibliografia do plano e na página do LMS. Os scripts deste manual (<code>plano_de_ensino.py</code>, <code>rubrica.py</code>, <code>turma_progresso.py</code>) têm a mesma licença.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 3 ===================== -->
+<section class="slide divider" id="s16" data-title="Parte 3 · O plano de ensino"><div class="inner"><div class="kicker-part rv">Parte 3<span>O plano de ensino</span></div><h2 class="rv"><code>plano_de_ensino.py</code>; o cronograma de 15 semanas; adaptar ao PPC; avaliação por entregas com evidência; regras de uso de IA na disciplina</h2><p class="rv">Um script gera o rascunho inteiro — <span class="gterm" tabindex="0" data-t="Ementa" data-d="O resumo do conteúdo da disciplina, em uma frase ou parágrafo, que consta do PPC.">ementa</span>, objetivos como entregas, cronograma, avaliação, regras de IA e bibliografia — a partir do que o PPC fixa: carga, semanas, <span class="gterm" tabindex="0" data-t="Nível" data-d="4 Atende com evidência anexada · 3 Atende · 2 Parcial · 1 Não atende; nota = Σ peso × nível/4.">nível</span>. O que sai é um ponto de partida datado, «modelo MirandasTech; ajuste ao PPC e ao regimento», como o próprio arquivo avisa na segunda linha.</p></div><div class="num">03</div></section>
+
+<section class="slide alt" id="s17" data-title="plano_de_ensino.py">
+  <div class="inner">
+    <div class="kicker-part rv">O plano de ensino<span>1 de 5 · execução real de 09/09/2026 · Python 3, só biblioteca padrão</span></div>
+    <h2 class="rv"><code>plano_de_ensino.py</code>: ementa, objetivos como entregas, cronograma semana → tema → manual → em aula → entrega, avaliação, regras de IA e bibliografia</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/pr_t1_plano_de_ensino.jpg" width="1920" height="560" alt="Terminal: python3 scripts/plano_de_ensino.py --disciplina Metodologia da Pesquisa --semanas 15 --carga 60 --nivel pos --saida PLANO_DE_ENSINO.md responde gravado: PLANO_DE_ENSINO.md (15 semanas, 15 fases cobertas); sed mostra o cabeçalho do cronograma e as semanas 1 a 7"></div><figcaption><b>Figura 10</b> Execução real de 09/09/2026 (turma fictícia; caminho trocado por <code>/home/usuario</code>): o comando com <code>--disciplina "Metodologia da Pesquisa" --semanas 15 --carga 60 --nivel pos</code> responde «gravado: PLANO_DE_ENSINO.md (15 semanas, 15 fases cobertas)»; o <code>sed -n 12,22p</code> mostra a tabela do cronograma — semana, tema, manual (slides), em aula, entrega (evidência) — da semana 1 (Diagnóstico e pasta do projeto) à 7 (Triagem e revisão sistemática).</figcaption></figure>
+    <div class="two rv">
+      <div>
+        <div class="code"><div class="code-head">terminal — uso</div><pre>python3 scripts/plano_de_ensino.py --disciplina "Metodologia da Pesquisa" --semanas 15 \
+    --carga 60 --nivel pos --saida PLANO_DE_ENSINO.md
+# sem --saida: imprime na tela; com --saida e arquivo existente: recusa, a menos que --forcar
+# --nivel graduacao | pos (padrão: pos) · --carga em horas (padrão: 60) · --semanas (padrão: 15)</pre></div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Seção gerada</th><th>O que traz</th></tr></thead><tbody>
+          <tr><td><b>Cabeçalho</b></td><td>Carga, semanas, nível e a data do rascunho — com o aviso «modelo MirandasTech; ajuste ao PPC e ao regimento»</td></tr>
+          <tr><td><b>Ementa</b></td><td>Da pergunta ao trabalho entregue, com uso declarado e verificado de IA</td></tr>
+          <tr><td><b>Objetivos</b></td><td>Quatro entregas (slide «Alinhamento construtivo»), não «conhecer»</td></tr>
+          <tr><td><b>Cronograma</b></td><td>Uma linha por semana: tema, manual (slides), em aula, entrega (evidência)</td></tr>
+          <tr><td><b>Avaliação</b></td><td>Por entregas com rubricas, pesos sugeridos, sem prova; <span class="gterm" tabindex="0" data-t="Recuperação por nova versão" data-d="Refazer a entrega com o comentário em mãos e registrar o que mudou no DECISOES.md; a mesma rubrica é aplicada de novo.">recuperação por nova versão</span></td></tr>
+          <tr><td><b>Uso de IA</b></td><td>Permitido com registro e declaração; o que é proibido; o plugin pode conduzir as fases</td></tr>
+          <tr><td><b>Bibliografia</b></td><td>Os manuais (CC BY 4.0, como citar) + «[preencher com referências verificadas]» da área</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O script escreve um rascunho, não o plano: a bibliografia da área fica marcada «[preencher]» de propósito, e a segunda linha do arquivo lembra que o PPC e o regimento mandam. Com outro número de semanas, as 15 fases são comprimidas ou expandidas proporcionalmente — o slide «Adaptar ao PPC» mostra o efeito.</p></div>
+        <div class="note"><span class="blabel">O que a saída diz</span><p>«15 fases cobertas» é a contagem de fases distintas que couberam no número de semanas pedido. Com 10 semanas, aparecem menos fases e você decide quais juntar; com 20, algumas fases ocupam duas semanas.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s18" data-title="O cronograma de 15 semanas">
+  <div class="inner">
+    <div class="kicker-part rv">O plano de ensino<span>2 de 5 · o cronograma padrão do plano_de_ensino.py · uma fase por semana</span></div>
+    <h2 class="rv">O cronograma de 15 semanas: cada semana tem tema, manual, atividade em aula e entrega com evidência</h2>
+    <div class="tw rv"><table><thead><tr><th class="num" style="width:50px">Sem.</th><th style="width:210px">Tema</th><th style="width:230px">Manual (slides)</th><th>Em aula</th><th style="width:270px">Entrega (evidência)</th></tr></thead><tbody>
+      <tr><td class="num">1</td><td>Diagnóstico e pasta do projeto</td><td>Uso de IA na pesquisa · Plugin</td><td>Criar a pasta com <code>iniciar_projeto.py</code>; acordo de uso de IA</td><td><code>PROGRESSO.md</code> criado; <code>USO_DE_IA.csv</code></td></tr>
+      <tr><td class="num">2</td><td>Tema → problema → pergunta</td><td>Metodologia (slides 7–9)</td><td>Oficina: da ideia à pergunta com tabela vazia do resultado</td><td>Pergunta + objetivos no <code>PROGRESSO.md</code></td></tr>
+      <tr><td class="num">3</td><td>Método e desenho</td><td>Metodologia (12–16)</td><td>Classificar o estudo; escolher e justificar o método</td><td>Frase «escolhi X porque…; descartei Y porque…»</td></tr>
+      <tr><td class="num">4</td><td>Projeto e ética</td><td>Metodologia (25–28) · Ciência aberta</td><td>Esqueleto NBR 15287; pré-registro; plano de gestão de dados</td><td><code>PROJETO.md</code>; <code>PREREGISTRO.md</code>; PGD</td></tr>
+      <tr><td class="num">5</td><td>Busca em bases</td><td>Busca em bases</td><td>Montar a string com Bramer; rodar em duas bases; diário</td><td><code>BUSCA.md</code> com strings verbatim e totais</td></tr>
+      <tr><td class="num">6</td><td>Biblioteca no Zotero</td><td>Zotero</td><td>Importar, organizar coleções, auditar metadados</td><td>Auditoria sem erro; <code>.bib</code> exportado</td></tr>
+      <tr><td class="num">7</td><td>Triagem e revisão sistemática</td><td>Revisão sistemática com PRISMA</td><td>Deduplicar; triar no ASReview; kappa; fluxograma</td><td><code>CONTAGENS.md</code>; fluxograma PRISMA</td></tr>
+      <tr><td class="num">8</td><td>Leitura e síntese</td><td>Gemini Notebook</td><td>Fichamento com página; matriz de síntese</td><td>Matriz de síntese conferida</td></tr>
+      <tr><td class="num">9</td><td>Bibliometria do campo</td><td>Bibliometria</td><td>Indicadores e mapa de termos do corpus</td><td><code>indicadores.md</code>; mapa aberto no VOSviewer Online</td></tr>
+      <tr><td class="num">10</td><td>Dados: limpeza e análise</td><td>Análise de dados</td><td><code>limpar_dados.py</code>; <code>analisar.py</code>; figura por script</td><td>Relatório de limpeza; resultado com efeito e IC</td></tr>
+      <tr><td class="num">11</td><td>Qualitativo com o Taguette</td><td>Análise de dados (Parte 5)</td><td>Codebook; codificar; exportar; síntese</td><td>Codebook; <code>sintese.md</code> com trechos</td></tr>
+      <tr><td class="num">12</td><td>Escrita em LaTeX/ABNT</td><td>LaTeX com Overleaf e abnTeX2</td><td><code>novo_trabalho.py</code>; citar do <code>.bib</code>; compilar</td><td>PDF sem «??»; <code>checar_citacoes.py</code> sem erro</td></tr>
+      <tr><td class="num">13</td><td>Versão e publicação</td><td>Git e GitHub · Ciência aberta</td><td>Commits por marco; README/LICENSE/CITATION.cff; depósito</td><td>Repositório auditado; <code>.zenodo.json</code></td></tr>
+      <tr><td class="num">14</td><td>Pré-banca</td><td>Defesa e qualificação</td><td>Roteiro; ensaio cronometrado; banca simulada</td><td><code>banca.md</code>; <code>ensaio.csv</code></td></tr>
+      <tr><td class="num">15</td><td>Entrega e declaração de uso de IA</td><td>Uso de IA (43) · Plugin</td><td>Checklist final; relatório do orientador</td><td><code>RELATORIO_ORIENTADOR.md</code>; declaração de IA</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="slide alt" id="s19" data-title="Adaptar ao PPC">
+  <div class="inner">
+    <div class="kicker-part rv">O plano de ensino<span>3 de 5 · o PPC e o regimento decidem; o script só reorganiza</span></div>
+    <h2 class="rv">Adaptar ao PPC: carga horária, número de semanas, graduação × pós — o que muda no cronograma e o que só você pode decidir</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">O <strong>PPC</strong> — Projeto Pedagógico do Curso — fixa a ementa, a carga horária e a forma de avaliação de cada disciplina; o <strong>regimento</strong> fixa calendário, frequência, recuperação e prazos. Nada disso vem do manual: o <code>plano_de_ensino.py</code> recebe esses números como argumentos e reorganiza as 15 fases para caber neles. O que ele <em>não</em> faz é decidir por você qual fase merece mais tempo na sua turma.</p>
+        <div class="tw"><table><thead><tr><th style="width:210px">Situação (do PPC)</th><th>O que o script faz</th><th style="width:230px">O que você decide</th></tr></thead><tbody>
+          <tr><td><b>10 semanas</b></td><td><code>--semanas 10</code>: as 15 fases são comprimidas proporcionalmente; algumas somem da tabela</td><td>Quais fases juntar (Busca + Zotero numa semana; Bibliometria opcional)</td></tr>
+          <tr><td><b>20 semanas</b></td><td><code>--semanas 20</code>: fases repetidas em semanas seguidas</td><td>Onde vale a segunda semana (Triagem; Análise; Escrita)</td></tr>
+          <tr><td><b>30 horas em vez de 60</b></td><td><code>--carga 30</code>: só o cabeçalho muda</td><td>Menos oficinas em aula, mais entregas assíncronas — ou menos fases</td></tr>
+          <tr><td><b>Graduação</b></td><td><code>--nivel graduacao</code>: só o rótulo do cabeçalho muda</td><td>A escala do projeto (um TCC, um artigo de iniciação) e quais entregas pedir; o cronograma é o mesmo</td></tr>
+          <tr><td><b>Disciplina sem dados quantitativos</b></td><td>Nada — o script não sabe a área</td><td>Trocar a semana 10 pela 11 (qualitativo) ou por uma segunda semana de síntese</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Gere, leia, corte. O rascunho é para ser editado: a coluna «Em aula» vira a sua oficina, a coluna «Manual» vira o link no LMS, a coluna «Entrega» vira a rubrica. O que sobrar de 15 fases num semestre de 10 semanas não é «atraso»: é escolha sua, registrada no plano.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Cronograma sem entrega.</strong> Uma semana com tema e manual, mas com «—» na coluna da entrega, é uma aula expositiva disfarçada. Se uma semana não produz nada que a rubrica confira, ou ela se junta à seguinte, ou a entrega dela é o que falta escrever.</p></div>
+        <div class="note"><span class="blabel">Graduação × pós</span><p>O script trata os dois níveis igual, de propósito: a diferença está na escala do projeto e na profundidade das entregas, que só o PPC do curso e você conhecem. Um curso de graduação pode pedir a pergunta, a busca, a biblioteca e a síntese e parar aí — e ainda ser uma disciplina por entregas.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s20" data-title="Avaliação por entregas com evidência">
+  <div class="inner">
+    <div class="kicker-part rv">O plano de ensino<span>4 de 5 · seção «Avaliação» do PLANO_DE_ENSINO.md · pesos sugeridos, não norma</span></div>
+    <h2 class="rv">Avaliação por entregas com evidência: cinco entregas, pesos sugeridos que somam 100 %, sem prova — e a recuperação é uma nova versão</h2>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:230px">Entrega</th><th class="num" style="width:110px">Peso sugerido</th><th>Rubrica (rubrica.py)</th><th>O que é conferido pelo arquivo</th></tr></thead><tbody>
+          <tr><td><b>Projeto</b></td><td class="num">20 %</td><td><code>--entrega projeto</code></td><td>Pergunta, método justificado, ética e dados, cronograma e pré-registro, estrutura NBR 15287</td></tr>
+          <tr><td><b>Busca + biblioteca + triagem</b></td><td class="num">20 %</td><td><code>--entrega busca</code></td><td>String verbatim, auditoria do Zotero e <code>.bib</code>, triagem com codebook, fluxograma PRISMA</td></tr>
+          <tr><td><b>Análise ou síntese</b></td><td class="num">20 %</td><td><code>--entrega analise</code></td><td>Limpeza documentada, técnica coerente, resultado com efeito e IC (ou síntese com trechos), figura por script</td></tr>
+          <tr><td><b>Texto final</b></td><td class="num">25 %</td><td><code>--entrega texto</code></td><td>ABNT sem erro de verificação, referências pelo gerenciador, números que batem, repositório, declaração de IA</td></tr>
+          <tr><td><b>Pré-banca e declaração de IA</b></td><td class="num">15 %</td><td><code>--entrega banca</code></td><td>Roteiro e ensaio, objeções respondidas, checklist do regimento</td></tr>
+        </tbody></table></div>
+        <div class="code"><div class="code-head">a fórmula que cada rubrica traz — e o que ela implica</div><pre>Nota = Σ peso × nível/4          # níveis: 4 Atende com evidência anexada · 3 Atende · 2 Parcial · 1 Não atende
+# nível 1 em tudo ainda dá 25 %: a rubrica mede o que existe, não pune o que falta duas vezes
+# nota da disciplina = Σ (nota da entrega × peso da entrega), se o regimento aceitar essa forma</pre></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Os pesos são sugestão do <code>plano_de_ensino.py</code>, não norma de ninguém: 20 · 20 · 20 · 25 · 15. Se o PPC exige prova, exame final ou nota mínima por instrumento, o PPC vale — e a rubrica passa a ser o instrumento que ele permite. O que o manual não abre mão: <em>cada entrega é conferida pelo arquivo, não pelo relato</em> — string verbatim, log de compilação, CSV de ensaio, auditoria do repositório.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Nota por impressão.</strong> «Esse aluno participa muito» não é critério de nenhuma rubrica; «esse texto parece feito com IA» também não. A nota sai da tabela critério × nível sobre o arquivo entregue; a impressão, quando houver, vira comentário — nunca ponto.</p></div>
+        <div class="note"><span class="blabel">Recuperação</span><p>Nova versão da entrega, com o que mudou e por quê no <code>DECISOES.md</code>, e a mesma rubrica aplicada de novo. Não avaliar pessoas por métricas (<span class="gterm" tabindex="0" data-t="Leiden/DORA" data-d="Regra herdada dos manuais irmãos: não avaliar pessoas por métricas — nem na pesquisa, nem na nota.">Leiden/DORA</span>) vale aqui também: número de páginas, de referências ou de commits não entra na conta.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s21" data-title="Regras de uso de IA na disciplina">
+  <div class="inner">
+    <div class="kicker-part rv">O plano de ensino<span>5 de 5 · seção «Uso de IA na disciplina» do PLANO_DE_ENSINO.md · CNPq · manual de Uso de IA</span></div>
+    <h2 class="rv">Regras de uso de IA na disciplina: permitido com registro e declaração; proibido gerar dados, resumir o que não leu e assinar texto gerado — e detector não é prova</h2>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:130px">Regra</th><th>O que diz</th><th style="width:250px">Como o professor confere</th></tr></thead><tbody>
+          <tr><td><span class="pill p-go">permitido</span></td><td>Usar IA em qualquer fase, <b>com registro</b> no <code>USO_DE_IA.csv</code> (ferramenta, fase, finalidade, validação) e <b>declaração</b> no texto</td><td>O CSV existe e é coerente com o texto; a declaração está na entrega final (critério da rubrica «texto»)</td></tr>
+          <tr><td><span class="pill p-stop">proibido</span></td><td><b>Gerar dados</b> (respostas, medições, «entrevistas» inventadas)</td><td>Os dados têm origem registrada: instrumento, data, arquivo bruto fora do repositório</td></tr>
+          <tr><td><span class="pill p-stop">proibido</span></td><td><b>Resumir fontes não lidas</b></td><td>A matriz de síntese traz a página de cada trecho; a fonte está na biblioteca auditada</td></tr>
+          <tr><td><span class="pill p-stop">proibido</span></td><td><b>Assinar texto gerado como próprio</b> (CNPq: IA não é autoria humana)</td><td>A declaração diz o que foi gerado e como foi revisado; o estudante responde pelo conteúdo</td></tr>
+          <tr><td><span class="pill p-amber">não é prova</span></td><td><b><span class="gterm" tabindex="0" data-t="Detector de IA" data-d="Ferramenta que estima se um texto foi gerado por IA; não é prova e não fundamenta nota nem sanção.">Detector de IA</span></b></td><td>Nenhuma nota, nenhuma sanção com base em detector; o que vale é a evidência da entrega e a declaração</td></tr>
+        </tbody></table></div>
+        <div class="code"><div class="code-head">USO_DE_IA.csv — as quatro colunas e uma linha de exemplo (exemplo ilustrativo)</div><pre>ferramenta,fase,finalidade,validacao
+assistente de IA,busca,"sugerir sinônimos para a string por conceitos","cada termo conferido no tesauro da base; string final no BUSCA.md"</pre></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A regra da disciplina é publicada na semana 1, junto com o acordo de uso de IA, e é a mesma do CNPq e do manual de Uso de IA: <em>declarar e verificar</em>. O plugin pode conduzir as fases; o estudante decide e o professor confere a evidência. Quem registrou e declarou está dentro da regra, ainda que tenha usado IA em tudo; quem não registrou e assinou como próprio está fora — com ou sem detector.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Punir por detector.</strong> Um «<span class="gterm" tabindex="0" data-t="Relatório de originalidade" data-d="Recurso do Google Sala de Aula que compara o trabalho com páginas da Web e livros; não detecta uso de IA.">relatório de originalidade</span>» do Classroom compara o trabalho com páginas da Web e livros — não diz se houve IA. Um «detector de IA» dá um número sem evidência que o estudante possa contestar. Nenhum dos dois é prova; o que é prova é a entrega sem registro, sem declaração, ou com fonte que não existe.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 4 ===================== -->
+<section class="slide divider" id="s22" data-title="Parte 4 · Rubricas e painel"><div class="inner"><div class="kicker-part rv">Parte 4<span>Rubricas e painel</span></div><h2 class="rv"><code>rubrica.py</code> e a rubrica «busca»; as cinco rubricas-modelo; <code>turma_progresso.py</code> e como ler o painel; feedback em três prioridades</h2><p class="rv">Dois scripts rodados de verdade em 09/09/2026: um gera a rubrica de cada entrega — critérios com peso, o arquivo que prova, quatro níveis — e o outro lê o <code>PROGRESSO.md</code> de cada pasta da turma e mostra, sem juízo, quem está onde e há quanto tempo parou. Depois, como transformar a rubrica preenchida no comentário que muda a próxima versão.</p></div><div class="num">04</div></section>
+
+<section class="slide" id="s23" data-title="rubrica.py e a rubrica «busca»">
+  <div class="inner">
+    <div class="kicker-part rv">Rubricas e painel<span>1 de 4 · execução real de 09/09/2026 · Python 3, só biblioteca padrão</span></div>
+    <h2 class="rv"><code>rubrica.py</code>: critérios com peso que somam 100, o arquivo que prova, quatro níveis e o comentário do que muda — a rubrica «busca» como saiu</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/pr_t2_rubrica.jpg" width="1920" height="560" alt="Terminal: python3 scripts/rubrica.py --entrega busca --saida RUBRICA_busca.md imprime a rubrica com a linha Nota = Σ peso × nível/4, a tabela de quatro critérios com peso e evidência, o campo Comentário ao estudante e gravado: RUBRICA_busca.md"></div><figcaption><b>Figura 11</b> Execução real de 09/09/2026 (turma fictícia; caminho trocado por <code>/home/usuario</code>): <code>rubrica.py --entrega busca --saida RUBRICA_busca.md</code> imprime «Nota = Σ peso × nível/4. A evidência é o arquivo, não o relato.», a tabela com os quatro critérios, os pesos (30, 25, 25, 20), a coluna «Evidência (arquivo)» e as quatro colunas de nível com caixas vazias, a linha «Comentário ao estudante (o que muda na próxima versão): [preencher]» e «gravado: RUBRICA_busca.md».</figcaption></figure>
+    <div class="two rv">
+      <div class="tw"><table><thead><tr><th>Critério (rubrica «busca», como gerada)</th><th class="num" style="width:70px">Peso</th><th style="width:230px">Evidência (arquivo)</th></tr></thead><tbody>
+        <tr><td>String por conceitos, registrada verbatim com data e totais em ≥ 2 bases</td><td class="num">30</td><td><code>BUSCA.md</code></td></tr>
+        <tr><td>Biblioteca no Zotero auditada (DOI, autores, tipo) e <code>.bib</code> exportado</td><td class="num">25</td><td><code>auditoria.csv</code>, <code>referencias.bib</code></td></tr>
+        <tr><td>Deduplicação e triagem com codebook e decisão humana registrada</td><td class="num">25</td><td><code>CONTAGENS.md</code>, <code>CODEBOOK.md</code></td></tr>
+        <tr><td>Fluxograma PRISMA com números que fecham</td><td class="num">20</td><td><code>fluxograma.png</code></td></tr>
+      </tbody></table></div>
+      <div>
+        <div class="code"><div class="code-head">terminal — as duas formas de uso</div><pre>python3 scripts/rubrica.py --entrega projeto|busca|analise|texto|banca [--saida RUBRICA_x.md]
+python3 scripts/rubrica.py --entrega custom \
+    --criterios "Pergunta clara;Método justificado;Evidência anexada" --peso "40;40;20"
+# pesos que não somam 100 → o script recusa; --saida existente → recusa, a menos que --forcar</pre></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Uma <strong>rubrica</strong> é a tabela critério × nível que substitui a impressão: para cada critério, o professor marca 4 (atende com a evidência anexada), 3 (atende), 2 (parcial) ou 1 (não atende), e a nota é Σ peso × nível/4. A coluna «Evidência (arquivo)» é o que distingue esta rubrica de uma lista de intenções: se o arquivo não está lá, o nível não passa de 2. Publique a rubrica <em>antes</em> da entrega — é o critério que ensina.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s24" data-title="As cinco rubricas-modelo">
+  <div class="inner">
+    <div class="kicker-part rv">Rubricas e painel<span>2 de 4 · os modelos internos do rubrica.py · pesos por critério somam 100</span></div>
+    <h2 class="rv">As cinco rubricas-modelo: entrega → critérios (com peso) → arquivos que provam</h2>
+    <div class="tw rv"><table><thead><tr><th style="width:130px">Entrega</th><th>Critérios (peso)</th><th style="width:330px">Arquivos que provam</th></tr></thead><tbody>
+      <tr><td><b>projeto</b></td><td>Pergunta delimitada, empírica e viável, com tabela vazia do resultado (25) · Método escolhido e justificado (25) · Ética e dados: CEP/TCLE quando há pessoas; plano de gestão de dados (20) · Cronograma e pré-registro, ou justificativa de não registrar (15) · Estrutura NBR 15287 e referências verificadas (15)</td><td><code>PROGRESSO.md</code>, <code>PROJETO.md</code>, <code>DECISOES.md</code>, <code>03_etica/</code>, <code>PLANO_GESTAO_DADOS.md</code>, <code>CRONOGRAMA.md</code>, <code>PREREGISTRO.md</code>, PDF do projeto, <code>verificar_refs.py</code></td></tr>
+      <tr><td><b>busca</b></td><td>String por conceitos, verbatim, com data e totais em ≥ 2 bases (30) · Biblioteca auditada e <code>.bib</code> (25) · Deduplicação e triagem com codebook e decisão humana (25) · Fluxograma PRISMA que fecha (20)</td><td><code>BUSCA.md</code>, <code>auditoria.csv</code>, <code>referencias.bib</code>, <code>CONTAGENS.md</code>, <code>CODEBOOK.md</code>, <code>fluxograma.png</code></td></tr>
+      <tr><td><b>analise</b></td><td>Limpeza documentada sem apagar linhas; decisões sobre ausentes e outliers (20) · Técnica coerente com o projeto; pressupostos conferidos (25) · Resultado com n, efeito e IC — ou síntese qualitativa com trechos e codebook (30) · Figura gerada por script, com unidade e n (15) · Relato conforme SAMPL/COREQ (10)</td><td>Relatório do <code>limpar_dados.py</code>, <code>DECISOES.md</code>, <code>resultado.md</code> ou <code>sintese.md</code>, <code>*.png</code> + script, seção de resultados</td></tr>
+      <tr><td><b>texto</b></td><td>Estrutura NBR 14724 e citações NBR 10520 sem erro de verificação (25) · Referências NBR 6023 pelo gerenciador, DOIs resolvidos (20) · Números do texto batem com as tabelas de origem (20) · Repositório versionado com README/LICENSE/CITATION.cff, sem dado pessoal (20) · Declaração de uso de IA completa e verdadeira (15)</td><td>PDF, <code>verificar_citacoes.py</code>, <code>verificar_refs.py</code>, planilha/CSV de origem, <code>checar_repo.py</code>, <code>USO_DE_IA.csv</code> + declaração</td></tr>
+      <tr><td><b>banca</b></td><td>Roteiro com tempo por bloco e ensaio cronometrado (30) · Cinco objeções mais fortes com resposta honesta e correção no texto (40) · Checklist do regimento preenchido (30)</td><td><code>apresentacao.pdf</code>, <code>ensaio.csv</code>, <code>banca.md</code>, <code>CHECKLIST_DEFESA.md</code></td></tr>
+    </tbody></table></div>
+    <div class="two rv">
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Os cinco modelos cobrem as cinco entregas da avaliação sugerida; <code>--entrega custom</code> serve para a entrega que o seu PPC pede e estes não cobrem. Em qualquer caso, cada critério tem de responder «qual arquivo prova?» — no modo custom o script deixa «[arquivo que prova]» para você preencher, e não aceita pesos que não somem 100.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">De onde vêm os arquivos</span><p>Os nomes (<code>BUSCA.md</code>, <code>CONTAGENS.md</code>, <code>checar_repo.py</code>…) são os que os manuais irmãos pedem ao estudante e que o plugin cria ou audita. Se a sua disciplina usa outros nomes, troque-os na rubrica — o que não pode é a coluna ficar vazia.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s25" data-title="turma_progresso.py e como ler o painel">
+  <div class="inner">
+    <div class="kicker-part rv">Rubricas e painel<span>3 de 4 · execução real de 09/09/2026 · turma fictícia criada com iniciar_projeto.py</span></div>
+    <h2 class="rv"><code>turma_progresso.py</code>: o painel lido dos <code>PROGRESSO.md</code> — fase atual, fases fechadas, dias sem alteração; parado há mais de 14 dias é motivo para conversa, não para nota</h2>
+    <figure class="rv"><div class="shot"><img src="capturas/pr_t3_turma_progresso.jpg" width="1920" height="560" alt="Terminal: python3 scripts/turma_progresso.py turma --markdown painel.md imprime o Painel da turma com quatro pastas fictícias: aluna_a na fase 2 Método com as fases 0 e 1 fechadas e 0 dias, aluna_c na fase 0 com 0 dias, aluno_b na fase 0 com 20 dias, aluno_d sem projeto; alerta para aluno_b e aluno_d; gravado: painel.md"></div><figcaption><b>Figura 12</b> Execução real de 09/09/2026 (turma fictícia; caminho trocado por <code>/home/usuario</code>): <code>turma_progresso.py turma --markdown painel.md</code> lê quatro pastas criadas com o <code>iniciar_projeto.py</code> para a demonstração — <code>aluna_a</code> na fase «2 — Método», fases 0 e 1 fechadas, 0 dias; <code>aluna_c</code> na fase «0 — Diagnóstico», 0 dias; <code>aluno_b</code> na fase 0 há 20 dias; <code>aluno_d</code> «sem projeto (rode iniciar_projeto.py)» — e termina com «Projetos parados há mais de 14 dias ou sem projeto: aluno_b, aluno_d — motivo para conversa, não para nota».</figcaption></figure>
+    <div class="two rv">
+      <div class="tw"><table><thead><tr><th style="width:190px">Coluna do painel</th><th>De onde vem</th><th style="width:250px">O que fazer com ela</th></tr></thead><tbody>
+        <tr><td><b>Estudante (pasta)</b></td><td>O nome da subpasta na pasta da turma</td><td>Use identificadores, não nomes completos, se a pasta for compartilhada</td></tr>
+        <tr><td><b>Tema</b></td><td>O título do <code>PROGRESSO.md</code></td><td>Conferir se ainda é o tema aprovado na semana 2</td></tr>
+        <tr><td><b>Fase atual</b></td><td>A primeira fase não marcada <code>[x]</code></td><td>Comparar com a semana do cronograma: quem está uma fase atrás precisa da oficina de novo</td></tr>
+        <tr><td><b>Fases fechadas</b></td><td>As marcadas <code>[x]</code> — só com evidência</td><td>É o que a rubrica vai avaliar; «nenhuma» na semana 5 é sinal</td></tr>
+        <tr><td><b>Dias sem alteração</b></td><td>Data de modificação do arquivo</td><td>&gt; 14 dias: conversa. Sem projeto: o <code>iniciar_projeto.py</code> não foi rodado</td></tr>
+      </tbody></table></div>
+      <div>
+        <div class="code"><div class="code-head">terminal — uso</div><pre>python3 scripts/turma_progresso.py turma                  # imprime o painel
+python3 scripts/turma_progresso.py turma --markdown painel.md   # e grava em Markdown
+# «turma» é uma pasta com uma subpasta por estudante, cada uma com o PROGRESSO.md do plugin</pre></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O painel mostra evidência, não juízo: ele não inventa fase, não estima nada e diz «sem projeto» quando o arquivo não existe. Parado há mais de 14 dias é o gatilho da conversa — «o que travou?» — e não desconta ponto; a nota vem da rubrica sobre a entrega. Rode a cada marco (uma vez por entrega), não todo dia.</p></div>
+        <div class="trap"><span class="blabel">Armadilha</span><p><strong>Usar dados reais de estudantes em exemplos.</strong> A turma da figura é fictícia. Ao mostrar o painel em aula, num relatório ou num manual, troque as pastas por identificadores — o painel é para o professor, não para a turma comparar-se.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s26" data-title="Feedback em três prioridades">
+  <div class="inner">
+    <div class="kicker-part rv">Rubricas e painel<span>4 de 4 · a linha «Comentário ao estudante» da rubrica · Hattie e Timperley (2007)</span></div>
+    <h2 class="rv">Feedback em três prioridades: primeiro o que impede a entrega de valer, depois o que muda o resultado, por último a forma</h2>
+    <div class="two rv">
+      <div>
+        <div class="flow">
+          <div class="node gate"><span class="nn">Prioridade 1</span><span class="nt">O que impede a entrega de valer</span><span class="nd">Evidência ausente ou que não bate: string não verbatim, fluxograma que não fecha com o <code>CONTAGENS.md</code>, PDF com «??», dado pessoal no repositório, declaração de IA ausente. Sem isso resolvido, o nível fica em 1 ou 2</span></div>
+          <div class="node"><span class="nn">Prioridade 2</span><span class="nt">O que muda o resultado</span><span class="nd">Método incoerente com a pergunta, pressuposto não conferido, técnica errada para o dado, síntese sem os trechos que a sustentam. É o que separa 3 de 4 — e o que o estudante leva para a próxima fase</span></div>
+          <div class="node"><span class="nn">Prioridade 3</span><span class="nt">A forma</span><span class="nd">Título da coleção, ordem das seções, figura sem unidade, estilo. Entra por último e só se houver espaço: um comentário de dez itens de forma esconde o item único de prioridade 1</span></div>
+        </div>
+        <div class="code"><div class="code-head">o comentário no fim da rubrica «analise» — exemplo ilustrativo, não é de um estudante real</div><pre>Comentário ao estudante (o que muda na próxima versão):
+1. [impede] A figura foi colada de uma planilha, não gerada por script (critério 4, nível 1): gere com o analisar.py e anexe o script.
+2. [resultado] O resultado traz p, mas não o efeito nem o IC (critério 3, nível 2): informe n, efeito e intervalo.
+3. [forma] Unidade no eixo y.
+Nova versão até a semana 12, com o que mudou no DECISOES.md.</pre></div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:190px">Quando</th><th>O que o estudante recebe</th></tr></thead><tbody>
+          <tr><td><b>Antes da entrega</b></td><td>A rubrica publicada: é o feedback que chega a tempo de mudar a entrega</td></tr>
+          <tr><td><b>Em aula (oficina)</b></td><td>O professor circula e aponta a evidência que falta — feedback de prioridade 1 em tempo real</td></tr>
+          <tr><td><b>Com a nota</b></td><td>A rubrica preenchida e o comentário em três prioridades, antes da semana em que a próxima entrega depende desta</td></tr>
+          <tr><td><b>Na nova versão</b></td><td>A mesma rubrica de novo; o <code>DECISOES.md</code> mostra o que mudou e por quê</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Três itens, na ordem em que valem nota, cada um apontando o critério e o nível. Feedback que chega depois da entrega seguinte não muda nada — é a armadilha «feedback tarde demais» da lista de erros comuns. Se o tempo só dá para um item, é o de prioridade 1.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 5 ===================== -->
+<section class="slide divider" id="s27" data-title="Parte 5 · Ambientes e estágio de docência"><div class="inner"><div class="kicker-part rv">Parte 5<span>Ambientes e estágio de docência</span></div><h2 class="rv">Google Sala de Aula; H5P e LibreOffice; GitHub Classroom descontinuado → repositórios comuns; Moodle; a Portaria CAPES 76/2010, Art. 18; o pós-graduando em sala sob supervisão</h2><p class="rv">Onde a disciplina vive — o LMS que recebe os links e as entregas, as ferramentas livres para exercícios e planilhas, o repositório do estudante — e a regra do estágio de docência, lida na portaria e nas páginas de duas pró-reitorias. Nenhuma tela logada: só páginas públicas de 09/09/2026.</p></div><div class="num">05</div></section>
+
+<section class="slide" id="s28" data-title="Google Sala de Aula">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>1 de 6 · Google for Education, página do Google Sala de Aula (pt) · captura de 09/09/2026</span></div>
+    <h2 class="rv">Google Sala de Aula: um tópico por semana com o link do manual, uma tarefa por entrega com a rubrica — e o «relatório de originalidade» não é detector de IA</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_07_classroom.jpg" width="1920" height="938" alt="Página do Google Sala de Aula no Google for Education em português: Ensino e aprendizagem mais integrados, parte do Google Workspace for Education, com os botões Fale com a equipe de vendas e Fazer login no Google Sala de Aula"></div><figcaption><b>Figura 13</b> A página do Google Sala de Aula no Google for Education (captura de 09/09/2026, sem login): «Ensino e aprendizagem mais integrados»; o app faz parte do Google Workspace for Education. A página pública descreve rubricas e «relatórios de originalidade» que comparam trabalhos «a bilhões de páginas da Web e a mais de 40 milhões de livros», uma versão gratuita e as edições Education Fundamentals e Plus; o acesso exige conta Google Workspace for Education. Nenhuma tela logada foi capturada.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:190px">Na disciplina</th><th>Como fica no Sala de Aula</th></tr></thead><tbody>
+          <tr><td><b>Cronograma</b></td><td>Um tópico por semana: o link do manual e da faixa de slides, a atividade da oficina, a data da entrega</td></tr>
+          <tr><td><b>Entrega</b></td><td>Uma tarefa por entrega; o estudante anexa o arquivo que a rubrica pede (o <code>BUSCA.md</code>, o PDF, o <code>.bib</code>) — o relato vai no comentário, a evidência vai no anexo</td></tr>
+          <tr><td><b>Rubrica</b></td><td>Os critérios e pesos do <code>rubrica.py</code> digitados na rubrica da tarefa; a nota sai da mesma tabela</td></tr>
+          <tr><td><b><span class="gterm" tabindex="0" data-t="Relatório de originalidade" data-d="Recurso do Google Sala de Aula que compara o trabalho com páginas da Web e livros; não detecta uso de IA.">Relatório de originalidade</span></b></td><td>Compara com páginas da Web e livros: serve para citação sem aspas, não para «detectar IA»</td></tr>
+          <tr><td><b>Conta</b></td><td>Google Workspace for Education da instituição; sem conta institucional, o Moodle ou repositórios comuns fazem o mesmo papel</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O LMS guarda links e entregas; ele não substitui a pasta do projeto. O <code>PROGRESSO.md</code> continua no computador do estudante (e no repositório dele), e o painel continua sendo o <code>turma_progresso.py</code> sobre as pastas — o Sala de Aula mostra o que foi entregue, o painel mostra em que fase cada projeto está.</p></div>
+        <div class="note"><span class="blabel">Sem preços</span><p>Este manual não cita preços das edições do Google Workspace for Education nem do H5P.com: não foram conferidos em 09/09/2026.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s29" data-title="H5P e LibreOffice">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>2 de 6 · h5p.org · libreoffice.org · capturas de 09/09/2026</span></div>
+    <h2 class="rv">H5P para exercícios interativos e LibreOffice para rubricas e planilhas de notas: duas ferramentas livres que não exigem licença paga</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_08_h5p.jpg" width="1920" height="938" alt="Página inicial do H5P: Create, share and reuse interactive HTML5 content in your browser, com um jogo de memória de exemplo e as seções Create, Share, Reuse and modify"></div><figcaption><b>Figura 14</b> h5p.org (captura de 09/09/2026, sem login): «Create, share and reuse interactive HTML5 content in your browser». O H5P é livre (licença MIT), integra-se a LMS por LTI — inclusive ao Moodle — e tem um serviço pago, o H5P.com. Serve para as perguntas conceituais de <em>peer instruction</em> e para exercícios de triagem (inclui/exclui) dentro do LMS.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/pr_17_libreoffice.jpg" width="1920" height="938" alt="Página inicial do LibreOffice: LibreOffice 26.8 is here!, LibreOffice is an open source office suite created by you, for you, com os botões Download now e Join our community e uma janela do Writer mostrando estilos"></div><figcaption><b>Figura 15</b> libreoffice.org (captura de 09/09/2026, sem login): «LibreOffice 26.8 is here!» e «LibreOffice is an open source office suite created by you, for you», da The Document Foundation. É o que basta para abrir a rubrica em <code>.md</code>, montar a planilha de notas (Σ peso × nível/4) e exportar o plano em PDF, sem licença paga.</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:130px">Ferramenta</th><th>Licença</th><th>Uso na disciplina</th></tr></thead><tbody>
+          <tr><td><b>H5P</b></td><td>MIT; integração por <span class="gterm" tabindex="0" data-t="LTI" data-d="O padrão de integração pelo qual o H5P (e outras ferramentas) entra num LMS como o Moodle.">LTI</span> com LMS (Moodle inclusive); H5P.com é pago</td><td>Pergunta conceitual com alternativas para a rodada individual do <em>peer instruction</em>; exercício de triagem com título e resumo</td></tr>
+          <tr><td><b>LibreOffice 26.8</b></td><td>Código aberto (The Document Foundation)</td><td>Planilha de notas com a fórmula da rubrica; edição da rubrica e do plano; PDF para o LMS</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Ferramenta livre não é obrigação: se a instituição já paga por um LMS ou por uma suíte, use o que a turma tem. A regra é outra — nada do que a disciplina exige do estudante pode depender de licença paga que ele não tenha. Os manuais irmãos seguem o mesmo critério.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s30" data-title="GitHub Classroom descontinuado e os ambientes">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>3 de 6 · GitHub Community, discussão #205975 · moodle.org (sem captura) · 09/09/2026</span></div>
+    <h2 class="rv">GitHub Classroom foi descontinuado: use repositórios comuns do GitHub, como no manual de Git — e a tabela dos ambientes que este manual conferiu</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_16_github_classroom.jpg" width="1920" height="938" alt="Discussão fixada e bloqueada na GitHub Community: Thank you for being part of the GitHub Classroom journey, com o anúncio GitHub Classroom is now retired as we complete the transition to partner solutions"></div><figcaption><b>Figura 16</b> A discussão #205975 da GitHub Community (captura de 09/09/2026, sem login): «GitHub Classroom is now retired as we complete the transition to partner solutions». O anúncio diz que «over 3.73 million students and educators» usaram o serviço em «more than 305,000 unique classroom instances», que o serviço foi aposentado em 28 de agosto de 2026 e que contas, repositórios e organizações criados por ele não são afetados.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:170px">Ambiente</th><th>O que é (conferido em 09/09/2026)</th><th style="width:230px">Papel na disciplina</th></tr></thead><tbody>
+          <tr><td><b>Google Sala de Aula</b></td><td>Parte do Google Workspace for Education; rubricas; relatórios de originalidade; versão gratuita e edições Fundamentals/Plus</td><td>Tópicos, tarefas, rubricas, entregas</td></tr>
+          <tr><td><b>Moodle</b></td><td>LMS livre sob GPL. Sem captura: moodle.org e docs.moodle.org estavam atrás da Cloudflare nessa data; por isso nenhuma versão é citada</td><td>O mesmo papel do Sala de Aula, na instituição que o hospeda; recebe H5P por <span class="gterm" tabindex="0" data-t="LTI" data-d="O padrão de integração pelo qual o H5P (e outras ferramentas) entra num LMS como o Moodle.">LTI</span></td></tr>
+          <tr><td><b>H5P</b></td><td>Conteúdo interativo HTML5; MIT; LTI; H5P.com pago</td><td>Perguntas conceituais e exercícios</td></tr>
+          <tr><td><b>LibreOffice 26.8</b></td><td>Suíte de escritório de código aberto</td><td>Rubricas, planilha de notas, PDF</td></tr>
+          <tr><td><b>GitHub (repositórios comuns)</b></td><td>O GitHub Classroom foi aposentado; o manual de Git ensina o repositório por projeto, com README, LICENSE, <code>CITATION.cff</code> e o <code>checar_repo.py</code></td><td>Um repositório por estudante; o professor lê o público ou entra como colaborador</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Não monte a disciplina sobre o GitHub Classroom nem sobre tutoriais que o usam: o serviço acabou. O que o manual de Git recomenda continua valendo — cada estudante versiona o próprio projeto num repositório comum, e a rubrica «texto» confere o repositório com o <code>checar_repo.py</code> (README, LICENSE, <code>CITATION.cff</code>, nenhum dado pessoal).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s31" data-title="Estágio de docência: Portaria 76/2010, Art. 18">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>4 de 6 · Portaria CAPES nº 76/2010, Art. 18 (PDF lido) · CAPES, Programa de Demanda Social · captura de 09/09/2026</span></div>
+    <h2 class="rv">Estágio de docência: «parte integrante da formação do pós-graduando» e obrigatório para os bolsistas do Programa de Demanda Social — os dez incisos do Art. 18</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_10_capes_ds.jpg" width="1920" height="938" alt="Página do Programa de Demanda Social (DS) no site da CAPES, com o objetivo do programa e os requisitos para participar, atrás do aviso de cookies e do balão Entrar com gov.br"></div><figcaption><b>Figura 17</b> A página do Programa de Demanda Social (DS) na CAPES (captura de 09/09/2026, sem login): bolsas de mestrado e doutorado para programas de instituições públicas com nota igual ou superior a 3, geridas pelas Pró-Reitorias de Pós-Graduação e pela Comissão de Bolsas. É a esse programa que o Art. 18 se refere quando torna o estágio obrigatório. O aviso de cookies e o balão do gov.br foram deixados como estavam.</figcaption></figure>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:60px">Inciso</th><th>O que o Art. 18 diz</th></tr></thead><tbody>
+          <tr><td class="num">—</td><td>O estágio de docência é «parte integrante da formação do pós-graduando, objetivando a preparação para a docência, e a qualificação do ensino de graduação sendo obrigatório para todos os bolsistas do <span class="gterm" tabindex="0" data-t="Programa de Demanda Social (DS)" data-d="Bolsas CAPES de mestrado e doutorado para programas de instituições públicas com nota ≥ 3, geridas pelas pró-reitorias e pela Comissão de Bolsas.">Programa de Demanda Social</span>»</td></tr>
+          <tr><td class="num">I</td><td>Programa com os dois níveis: a obrigatoriedade fica restrita ao doutorado</td></tr>
+          <tr><td class="num">II</td><td>Programa só com mestrado: a obrigatoriedade é transferida ao mestrado</td></tr>
+          <tr><td class="num">III</td><td>Instituição sem graduação: associa-se a outra para atender à exigência</td></tr>
+          <tr><td class="num">IV</td><td>Pode ser remunerado a critério da instituição, «vedado à utilização de recursos repassados pela CAPES»</td></tr>
+          <tr><td class="num">V</td><td>Duração mínima de um semestre (mestrado) e dois (doutorado); máxima de dois e três</td></tr>
+          <tr><td class="num">VI</td><td>A <span class="gterm" tabindex="0" data-t="Comissão de Bolsas" data-d="A comissão CAPES/DS do programa que registra e avalia o estágio de docência e define a supervisão (inciso VI).">Comissão de Bolsas</span> CAPES/DS registra e avalia o estágio e define «a supervisão e o acompanhamento»</td></tr>
+          <tr><td class="num">VII</td><td>Quem já é docente de ensino superior fica dispensado</td></tr>
+          <tr><td class="num">VIII</td><td>As atividades devem ser compatíveis com a área de pesquisa do pós-graduando</td></tr>
+          <tr><td class="num">IX</td><td>Admite-se estágio na rede pública de ensino médio, quando pactuado</td></tr>
+          <tr><td class="num">X</td><td>«Carga horária máxima… 4 horas semanais»</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s32" data-title="Como as instituições aplicam o Art. 18">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>5 de 6 · UFSM/PRPGP · UFES/PRPPG · capturas de 09/09/2026</span></div>
+    <h2 class="rv">Como duas pró-reitorias aplicam o Art. 18: os mesmos limites, as dispensas, a «docência orientada» — e o que só vale para bolsistas DS</h2>
+    <div class="two rv">
+      <figure><div class="shot"><img src="capturas/pr_11_ufsm_estagio_docencia.jpg" width="1920" height="938" alt="Página Exigência de Estágio em Docência para bolsistas CAPES na PRPGP da UFSM, descrevendo a disciplina Docência Orientada, a dispensa prevista na Portaria 221/2025 e a dispensa já prevista na Portaria 76/2010"></div><figcaption><b>Figura 18</b> «Exigência de Estágio em Docência para bolsistas CAPES», PRPGP/UFSM (captura de 09/09/2026, sem login): o estágio é cumprido na instituição pela disciplina de «Docência Orientada»; a página descreve as hipóteses de dispensa e lembra que a Portaria 76/2010 já dispensava quem comprova docência em nível superior concomitante. Os limites são os do Art. 18.</figcaption></figure>
+      <figure><div class="shot"><img src="capturas/pr_12_ufes_estagio_docencia.jpg" width="1920" height="938" alt="Página Estágios de Docência na PRPPG da UFES, reproduzindo o Art. 18 da Portaria CAPES 76/2010 e afirmando que o estágio é obrigatório para os bolsistas do Programa de Demanda Social e opcional para os demais"></div><figcaption><b>Figura 19</b> «Estágios de Docência», PRPPG/UFES (captura de 09/09/2026, sem login): o estágio é «obrigatório para os bolsistas vinculados ao Programa de Demanda Social» e opcional para os demais estudantes; a página reproduz o Art. 18, inciso a inciso, e remete às «hipóteses de dispensa do art. 18-A».</figcaption></figure>
+    </div>
+    <div class="two rv">
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:150px">Ponto</th><th>UFSM/PRPGP</th><th>UFES/PRPPG</th></tr></thead><tbody>
+          <tr><td><b>Forma</b></td><td>Disciplina de «Docência Orientada»</td><td>Estágio de docência, conforme o Art. 18</td></tr>
+          <tr><td><b>Para quem é obrigatório</b></td><td>Bolsistas CAPES</td><td>Bolsistas do <span class="gterm" tabindex="0" data-t="Programa de Demanda Social (DS)" data-d="Bolsas CAPES de mestrado e doutorado para programas de instituições públicas com nota ≥ 3, geridas pelas pró-reitorias e pela Comissão de Bolsas.">Programa de Demanda Social</span>; opcional para os demais</td></tr>
+          <tr><td><b>Dispensas</b></td><td>Docência em nível superior concomitante (Art. 18); hipóteses da Portaria 221/2025</td><td>Hipóteses de dispensa do art. 18-A</td></tr>
+          <tr><td><b>Limites</b></td><td colspan="2">Os do Art. 18: semestres mínimos e máximos, até 4 horas semanais, atividades compatíveis com a área de pesquisa</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>A portaria trata dos bolsistas do Programa de Demanda Social da CAPES. Este manual <em>não</em> afirma que a mesma regra vale para bolsistas de outras agências ou para quem não tem bolsa: isso é o regimento do programa e a pró-reitoria que dizem. Antes de acolher um estagiário na sua disciplina, leia a página da sua pró-reitoria — as duas capturadas mostram que cada instituição regulamenta a forma.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s33" data-title="O pós-graduando conduz semanas sob supervisão">
+  <div class="inner">
+    <div class="kicker-part rv">Ambientes e estágio de docência<span>6 de 6 · Art. 18, incisos VI, VIII e X · o cronograma da Parte 3</span></div>
+    <h2 class="rv">Como o pós-graduando conduz semanas do cronograma sob supervisão: registro na Comissão de Bolsas, até 4 horas semanais, atividades da própria área — e a nota continua sendo do professor</h2>
+    <div class="two rv">
+      <div>
+        <div class="flow">
+          <div class="node"><span class="nn">1</span><span class="nt">Registro (inciso VI)</span><span class="nd">A <span class="gterm" tabindex="0" data-t="Comissão de Bolsas" data-d="A comissão CAPES/DS do programa que registra e avalia o estágio de docência e define a supervisão (inciso VI).">Comissão de Bolsas</span> CAPES/DS registra o estágio e define a supervisão; o professor da disciplina é o supervisor</span></div>
+          <div class="node"><span class="nn">2</span><span class="nt">Semanas compatíveis (VIII)</span><span class="nd">O supervisor escolhe as semanas do cronograma que casam com a área de pesquisa do estagiário: quem faz revisão sistemática conduz as semanas 5 a 7</span></div>
+          <div class="node"><span class="nn">3</span><span class="nt">Até 4 h semanais (X)</span><span class="nd">Uma oficina por semana, mais a correção de uma entrega com a rubrica, cabe no limite; duas turmas não cabem</span></div>
+          <div class="node"><span class="nn">4</span><span class="nt">Conduzir a oficina</span><span class="nd">Com o manual aberto, a atividade da coluna «Em aula» e a rubrica publicada; o supervisor assiste ou revisa</span></div>
+          <div class="node gate"><span class="nn">5</span><span class="nt">Registro e nota</span><span class="nd">Plano do estagiário e relatório para a Comissão de Bolsas; a nota da entrega é do professor — o estagiário preenche a rubrica, o professor confere e assina</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="tw"><table><thead><tr><th style="width:250px">O estagiário pode (sugestão)</th><th>Fica com o professor</th></tr></thead><tbody>
+          <tr><td>Conduzir as oficinas das semanas escolhidas e as rodadas de <em>peer instruction</em></td><td>O plano de ensino, o cronograma e o que muda nele</td></tr>
+          <tr><td>Preencher a rubrica de uma entrega e escrever o comentário em três prioridades</td><td>Conferir a rubrica, decidir a nota, assinar</td></tr>
+          <tr><td>Rodar o <code>turma_progresso.py</code> e conversar com quem parou</td><td>A decisão sobre o que fazer com quem parou</td></tr>
+          <tr><td>Adaptar um manual (CC BY) para a oficina, com atribuição</td><td>Aprovar o material antes da aula</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>Estágio de docência sem registro não existe: sem o registro na Comissão de Bolsas (inciso VI) e sem o plano com as semanas, a carga e a supervisão, o pós-graduando está só «ajudando». O supervisor confere o limite de 4 horas semanais, a compatibilidade com a área e a duração (um ou dois semestres no mínimo, dois ou três no máximo) — e o regimento do programa diz o resto.</p></div>
+        <div class="note"><span class="blabel">Para o estagiário</span><p>A Parte 3 é o que você vai conduzir; a Parte 4 é como vai corrigir; o manual de Metodologia é o que a turma vai ler. Guarde o plano, a lista das semanas conduzidas e as rubricas preenchidas: é o seu relatório.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTE 6 ===================== -->
+<section class="slide divider" id="s34" data-title="Parte 6 · Fechar"><div class="inner"><div class="kicker-part rv">Parte 6<span>Fechar</span></div><h2 class="rv">Tudo num só plugin; erros comuns; checklist; glossário; referências; como citar</h2><p class="rv">A skill que reúne plano, rubricas e painel dentro do assistente — sem decidir nada pelo professor —, a lista do que costuma dar errado numa disciplina por entregas, o checklist para conferir antes do semestre, os termos e as fontes.</p></div><div class="num">06</div></section>
+
+<section class="slide" id="s35" data-title="Tudo num só plugin">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>1 de 7 · skill ensino-pesquisa do plugin Pesquisa MirandasTech</span></div>
+    <h2 class="rv">Tudo num só plugin: a skill <code>ensino-pesquisa</code> monta plano, rubricas e painel a partir do que você decide — e recusa dar nota por impressão</h2>
+    <div class="two rv">
+      <div>
+        <p class="lead">O <a href="https://plugin.mirandastech.com.br/">plugin Pesquisa MirandasTech</a> (Claude Code e Codex) traz a skill <code>ensino-pesquisa</code>, que segue este manual: gera o plano de ensino com o <code>plano_de_ensino.py</code>, uma rubrica por entrega com o <code>rubrica.py</code>, o painel com o <code>turma_progresso.py</code>, aplica as regras de uso de IA e os limites do Art. 18. O que ela não faz é decidir: <strong>notas, critérios e o PPC são do professor e da instituição</strong>. A skill nunca avalia estudantes por impressão — a rubrica aponta o arquivo que prova cada nível, e o painel mostra evidência, não juízo.</p>
+        <div class="tw"><table><thead><tr><th style="width:110px">Passo</th><th>O que a skill faz com você</th></tr></thead><tbody>
+          <tr><td><b>1</b></td><td>PPC e regimento → carga, semanas, nível → <code>plano_de_ensino.py</code> → você ajusta temas e bibliografia da área</td></tr>
+          <tr><td><b>2</b></td><td>Uma rubrica por entrega, publicada antes da entrega; os estudantes criam a pasta do projeto na semana 1</td></tr>
+          <tr><td><b>3</b></td><td>A cada marco: <code>turma_progresso.py</code>; conversar com quem parou; registrar</td></tr>
+          <tr><td><b>4</b></td><td>Fim: notas pelas rubricas; declaração de uso de IA de cada estudante; o que muda no próximo semestre</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="code"><div class="code-head">pedidos ao assistente, na pasta da disciplina (a skill lê os scripts e este manual)</div><pre>Monte o plano de ensino de «Metodologia da Pesquisa»: 15 semanas, 60 h, pós.
+Gere a rubrica da entrega «busca» e explique cada critério para a turma.
+Leia o painel da pasta turma/ e me diga com quem preciso conversar.
+Escreva as regras de uso de IA da disciplina a partir do CNPq e do manual de Uso de IA.
+Meu estagiário de docência vai conduzir as semanas 5 a 7: monte o plano dele dentro do Art. 18.</pre></div>
+        <div class="tw"><table><thead><tr><th style="width:250px">Pedido</th><th>Resposta da skill</th></tr></thead><tbody>
+          <tr><td>«Dá nota pela impressão que você tem do aluno»</td><td><span class="pill p-stop">recusa</span> — a nota vem da rubrica sobre o arquivo entregue</td></tr>
+          <tr><td>«Reprova quem usou IA»</td><td><span class="pill p-stop">recusa</span> — a regra é declarar e verificar; detector não é prova</td></tr>
+          <tr><td>«Copia o manual sem citar»</td><td><span class="pill p-stop">recusa</span> — CC BY exige atribuição</td></tr>
+        </tbody></table></div>
+        <div class="rule-box"><span class="blabel">Regra</span><p>O assistente prepara; você decide. Ele não tem acesso às notas, não lança nada no LMS e não conversa com o estudante no seu lugar. A pasta da turma que ele lê é a de <code>PROGRESSO.md</code> — sem nomes completos, se puder.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s36" data-title="Erros comuns">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>2 de 7</span></div>
+    <h2 class="rv">Erros comuns — como aparecem e como corrigir</h2>
+    <div class="tw rv"><table><thead><tr><th style="width:230px">Erro</th><th>Como aparece</th><th>Causa</th><th style="width:300px">Correção</th></tr></thead><tbody>
+      <tr><td>Prova de memorização</td><td>Prova sobre tipos de pesquisa; nenhum estudante com projeto</td><td>Avaliação desalinhada do objetivo</td><td><span class="pill p-blue">entregas com rubrica (Partes 3 e 4)</span></td></tr>
+      <tr><td>Objetivo «conhecer»</td><td>«Conhecer as etapas do método científico»</td><td>Objetivo escrito como tema</td><td><span class="pill p-blue">reescrever como o arquivo que o estudante entrega</span></td></tr>
+      <tr><td>Rubrica sem arquivo</td><td>Critério «demonstra domínio do método» sem evidência</td><td>Coluna «Evidência (arquivo)» vazia</td><td><span class="pill p-amber">cada critério aponta o arquivo que prova</span></td></tr>
+      <tr><td>Nota por impressão</td><td>«Participa muito», «parece feito com IA»</td><td>Sem rubrica, ou rubrica ignorada</td><td><span class="pill p-stop">nota = Σ peso × nível/4 sobre o arquivo</span></td></tr>
+      <tr><td>Sem regra de IA</td><td>Cada estudante supõe uma regra; conflito na entrega final</td><td>Acordo de uso de IA não publicado na semana 1</td><td><span class="pill p-blue">regra do CNPq + registro + declaração, na semana 1</span></td></tr>
+      <tr><td>Punir por detector</td><td>Nota zero «porque o detector deu 80 %»</td><td>Detector tratado como prova</td><td><span class="pill p-stop">detector não é prova; conferir registro, declaração e fontes</span></td></tr>
+      <tr><td>Copiar manual sem citar</td><td>Slides da série na apostila da disciplina, sem crédito</td><td>Achou que livre dispensava atribuição</td><td><span class="pill p-amber">CC BY: crédito, licença, mudanças (slide «Licença»)</span></td></tr>
+      <tr><td>Cronograma sem entrega</td><td>Semana com tema e manual, «—» na entrega</td><td>Aula expositiva disfarçada</td><td><span class="pill p-blue">juntar à seguinte ou escrever a entrega</span></td></tr>
+      <tr><td>Feedback tarde demais</td><td>Nota da busca chega depois da entrega da análise</td><td>Correção acumulada para o fim</td><td><span class="pill p-amber">rubrica preenchida antes da próxima entrega que depende desta</span></td></tr>
+      <tr><td>Ignorar quem parou</td><td>Estudante na fase 0 na semana 8; ninguém falou com ele</td><td>Painel não rodado, ou rodado e não lido</td><td><span class="pill p-blue">turma_progresso.py a cada marco; &gt; 14 dias = conversa</span></td></tr>
+      <tr><td>Estágio de docência sem registro</td><td>Pós-graduando «ajudando» sem plano, sem supervisão definida</td><td>Comissão de Bolsas não acionada (inciso VI)</td><td><span class="pill p-stop">registrar; semanas, carga (≤ 4 h) e supervisão por escrito</span></td></tr>
+      <tr><td>Dados reais de estudantes em exemplos</td><td>Painel com nomes completos num slide de aula ou num manual</td><td>Turma real usada como exemplo</td><td><span class="pill p-stop">identificadores ou turma fictícia, como neste manual</span></td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="slide" id="s37" data-title="Checklist antes do semestre">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>3 de 7</span></div>
+    <h2 class="rv">Checklist: antes do semestre começar</h2>
+    <p class="lead rv">Marque conforme concluir. O estado fica salvo neste navegador — não é compartilhado nem enviado a lugar nenhum.</p>
+    <div class="check rv" id="checklist">
+      <div class="check-item"><input type="checkbox" id="c01"><label for="c01"><b>PPC e regimento</b>Carga horária, semanas, nível, forma de avaliação e recuperação lidos no PPC e no regimento — antes de gerar qualquer coisa</label></div>
+      <div class="check-item"><input type="checkbox" id="c02"><label for="c02"><b>Objetivos</b>Cada objetivo do plano escrito como o arquivo que o estudante entrega, não como «conhecer»</label></div>
+      <div class="check-item"><input type="checkbox" id="c03"><label for="c03"><b>Cronograma</b><code>plano_de_ensino.py</code> gerado com os números do PPC; cada semana com tema, manual, «em aula» e entrega; nenhuma semana com «—» na entrega</label></div>
+      <div class="check-item"><input type="checkbox" id="c04"><label for="c04"><b>Bibliografia</b>O «[preencher]» da área preenchido com referências verificadas; os manuais citados com a versão e a data da capa</label></div>
+      <div class="check-item"><input type="checkbox" id="c05"><label for="c05"><b>Rubricas</b>Uma por entrega (<code>rubrica.py</code>), pesos somando 100, cada critério com o arquivo que prova — publicadas antes da entrega</label></div>
+      <div class="check-item"><input type="checkbox" id="c06"><label for="c06"><b>Regra de IA</b>Acordo de uso de IA da semana 1: registro em <code>USO_DE_IA.csv</code>, declaração no texto, o que é proibido; nenhuma sanção baseada em detector</label></div>
+      <div class="check-item"><input type="checkbox" id="c07"><label for="c07"><b>Semana 1</b>Oficina da pasta: cada estudante roda o <code>iniciar_projeto.py</code> e entrega o <code>PROGRESSO.md</code> criado</label></div>
+      <div class="check-item"><input type="checkbox" id="c08"><label for="c08"><b>LMS</b>Um tópico por semana com o link do manual e da faixa de slides; uma tarefa por entrega com a rubrica; atribuição CC BY em cada material adaptado</label></div>
+      <div class="check-item"><input type="checkbox" id="c09"><label for="c09"><b>Painel</b>Pasta da turma com uma subpasta por estudante (identificadores, não nomes); <code>turma_progresso.py</code> agendado para cada marco</label></div>
+      <div class="check-item"><input type="checkbox" id="c10"><label for="c10"><b>Feedback</b>Data de devolução de cada rubrica anterior à entrega seguinte que depende dela; comentário em três prioridades</label></div>
+      <div class="check-item"><input type="checkbox" id="c11"><label for="c11"><b>Estágio de docência</b>Se houver estagiário: registro na Comissão de Bolsas, semanas conduzidas compatíveis com a área, até 4 h semanais, supervisão e relatório definidos</label></div>
+      <div class="check-item"><input type="checkbox" id="c12"><label for="c12"><b>Exemplos</b>Nenhum dado real de estudante em slide, manual ou relatório: turma fictícia ou identificadores</label></div>
+      <div class="check-foot"><span id="check-status">0 de 12</span><button type="button" id="check-reset">limpar</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" id="s38" data-title="Glossário">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>4 de 7</span></div>
+    <h2 class="rv">Glossário</h2>
+    <p class="lead rv">Tudo que aparece no manual sem ser explicado no próprio slide.</p>
+    <div class="gl4 rv"><div><h4 style="margin-top:0">Ensino e avaliação</h4><dl class="gl"><dt>Alinhamento construtivo</dt><dd>Biggs (1996): objetivos, atividades de ensino e avaliação alinhados ao que o estudante deve fazer; o objetivo já diz qual é a entrega.</dd><dt>Aprendizagem ativa</dt><dd>Aula em que o estudante faz — oficina, discussão, exercício — em vez de só ouvir; Freeman et al. (2014) mostram que aumenta o desempenho em ciências, engenharia e matemática.</dd><dt>Orientação explícita</dt><dd>Kirschner, Sweller e Clark (2006): iniciantes precisam de guia passo a passo; descoberta sem guia não funciona. Os manuais são esse guia.</dd><dt>Peer instruction</dt><dd>Crouch e Mazur (2001): pergunta conceitual, resposta individual, discussão em pares, nova resposta, explicação.</dd><dt>Feedback</dt><dd>Hattie e Timperley (2007): a informação sobre o desempenho que o estudante usa para melhorar; aqui, o comentário «o que muda na próxima versão».</dd><dt>Rubrica</dt><dd>Tabela critério × nível; no <code>rubrica.py</code>, cada critério tem peso (soma 100) e o arquivo que prova.</dd><dt>Nível</dt><dd>4 Atende com evidência anexada · 3 Atende · 2 Parcial · 1 Não atende; nota = Σ peso × nível/4.</dd><dt>Evidência</dt><dd>O artefato que prova a entrega — o arquivo, não o relato.</dd><dt>Entrega</dt><dd>O que o estudante produz numa fase e a rubrica confere: <code>BUSCA.md</code>, <code>.bib</code>, PDF, <code>banca.md</code>…</dd><dt>Recuperação por nova versão</dt><dd>Refazer a entrega com o comentário em mãos e registrar o que mudou no <code>DECISOES.md</code>; a mesma rubrica é aplicada de novo.</dd><dt>PPC</dt><dd>Projeto Pedagógico do Curso: fixa ementa, carga horária, objetivos e avaliação; prevalece sobre o manual.</dd><dt>Regimento</dt><dd>As normas da instituição ou do programa: calendário, frequência, recuperação, prazos.</dd><dt>Plano de ensino</dt><dd>O documento da disciplina: ementa, objetivos, cronograma, avaliação, bibliografia — o <code>plano_de_ensino.py</code> gera o rascunho.</dd><dt>Ementa</dt><dd>O resumo do conteúdo da disciplina, em uma frase ou parágrafo, que consta do PPC.</dd></dl></div><div><h4 style="margin-top:0">Normas, ferramentas e arquivos</h4><dl class="gl"><dt>Estágio de docência</dt><dd>Art. 18 da Portaria CAPES 76/2010: formação do pós-graduando para a docência; obrigatório para bolsistas DS; limites de semestres e de 4 h semanais.</dd><dt>Programa de Demanda Social (DS)</dt><dd>Bolsas CAPES de mestrado e doutorado para programas de instituições públicas com nota ≥ 3, geridas pelas pró-reitorias e pela Comissão de Bolsas.</dd><dt>Comissão de Bolsas</dt><dd>A comissão CAPES/DS do programa que registra e avalia o estágio de docência e define a supervisão (inciso VI).</dd><dt>CC BY 4.0</dt><dd>Creative Commons Atribuição 4.0 Internacional: compartilhar e adaptar para qualquer fim, mesmo comercial, com crédito, link da licença e indicação das mudanças.</dd><dt>Atribuição</dt><dd>O crédito exigido pela CC BY: autor, título, série, versão, data e licença — «MATIAS, J. P. M. &lt;título&gt;. MirandasTech, v1.0, set. 2026.»</dd><dt>LMS</dt><dd>Learning Management System, o ambiente virtual de aprendizagem: Moodle (livre, GPL), Google Sala de Aula.</dd><dt>LTI</dt><dd>O padrão de integração pelo qual o H5P (e outras ferramentas) entra num LMS como o Moodle.</dd><dt>Relatório de originalidade</dt><dd>Recurso do Google Sala de Aula que compara o trabalho com páginas da Web e livros; não detecta uso de IA.</dd><dt>Detector de IA</dt><dd>Ferramenta que estima se um texto foi gerado por IA; não é prova e não fundamenta nota nem sanção.</dd><dt>Integridade (CNPq)</dt><dd>As diretrizes do CNPq: declarar ferramenta e finalidade da IA; IA não é autoria humana; citações com aspas; obras originais.</dd><dt>Leiden/DORA</dt><dd>Regra herdada dos manuais irmãos: não avaliar pessoas por métricas — nem na pesquisa, nem na nota.</dd><dt>PROGRESSO.md</dt><dd>Arquivo de estado do projeto de cada estudante, criado pelo <code>iniciar_projeto.py</code>; lista as 11 fases e marca as fechadas com evidência; o painel o lê.</dd><dt>USO_DE_IA.csv</dt><dd>Registro do uso de IA: ferramenta, fase, finalidade, validação; base da declaração no texto.</dd><dt>DECISOES.md</dt><dd>Onde o estudante escreve o que mudou e por quê — na nova versão de uma entrega e nas escolhas de método.</dd></dl></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s39" data-title="Referências (1 de 2)">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>5 de 7 · literatura conferida no Crossref e regras herdadas · 09/09/2026</span></div>
+    <h2 class="rv">Referências (1 de 2): a literatura e as regras de integridade</h2>
+    <ol class="refs rv" start="1">
+      <li><span class="rt">BIGGS, J. Enhancing teaching through constructive alignment. <em>Higher Education</em>, v. 32, p. 347-364, out. 1996.</span><a href="https://doi.org/10.1007/BF00138871">doi.org/10.1007/BF00138871</a></li>
+      <li><span class="rt">FREEMAN, S.; EDDY, S. L.; McDONOUGH, M. et al. Active learning increases student performance in science, engineering, and mathematics. <em>PNAS</em>, 2014.</span><a href="https://doi.org/10.1073/pnas.1319030111">doi.org/10.1073/pnas.1319030111</a></li>
+      <li><span class="rt">HATTIE, J.; TIMPERLEY, H. The Power of Feedback. <em>Review of Educational Research</em>, 2007.</span><a href="https://doi.org/10.3102/003465430298487">doi.org/10.3102/003465430298487</a></li>
+      <li><span class="rt">KIRSCHNER, P. A.; SWELLER, J.; CLARK, R. E. Why Minimal Guidance During Instruction Does Not Work: An Analysis of the Failure of Constructivist, Discovery, Problem-Based, Experiential, and Inquiry-Based Teaching. <em>Educational Psychologist</em>, v. 41, n. 2, 2006.</span><a href="https://doi.org/10.1207/s15326985ep4102_1">doi.org/10.1207/s15326985ep4102_1</a></li>
+      <li><span class="rt">CROUCH, C. H.; MAZUR, E. Peer Instruction: Ten years of experience and results. <em>American Journal of Physics</em>, 2001.</span><a href="https://doi.org/10.1119/1.1374249">doi.org/10.1119/1.1374249</a></li>
+      <li><span class="rt">CNPq. <em>Diretrizes de integridade na pesquisa apoiada pelo CNPq</em>. Comissão de Integridade na Atividade Científica. Acesso em 9 set. 2026.</span><a href="https://www.gov.br/cnpq/">gov.br/cnpq</a></li>
+      <li><span class="rt">LEIDEN MANIFESTO; DORA (San Francisco Declaration on Research Assessment). Regra herdada dos manuais irmãos: não avaliar pessoas por métricas.</span><a href="https://www.leidenmanifesto.org/">leidenmanifesto.org</a> <a href="https://sfdora.org/">sfdora.org</a></li>
+    </ol>
+    <div class="note rv"><span class="blabel">Sobre o que não está aqui</span><p>As páginas da PNAS (Freeman) e da <em>Review of Educational Research</em> (Hattie e Timperley) estavam atrás da Cloudflare em 09/09/2026; as referências foram conferidas pelo Crossref. Por isso o manual cita títulos e argumentos, e nenhum resultado numérico dessas meta-análises.</p></div>
+  </div>
+</section>
+
+<section class="slide alt" id="s40" data-title="Referências (2 de 2)">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar<span>6 de 7 · normas, programas, ambientes e a série · páginas públicas de 09/09/2026</span></div>
+    <h2 class="rv">Referências (2 de 2): a portaria, as pró-reitorias, os ambientes, a licença e os manuais</h2>
+    <ol class="refs rv" start="8">
+      <li><span class="rt">CAPES. <em>Portaria nº 76, de 14 de abril de 2010</em> — Regulamento do Programa de Demanda Social, Art. 18 (Estágio de docência). PDF lido em 9 set. 2026.</span><a href="https://www.gov.br/capes/">gov.br/capes</a></li>
+      <li><span class="rt">CAPES. <em>Programa de Demanda Social (DS)</em>. Acesso em 9 set. 2026.</span><a href="https://www.gov.br/capes/">gov.br/capes</a></li>
+      <li><span class="rt">UFSM. Pró-Reitoria de Pós-Graduação e Pesquisa (PRPGP). <em>Exigência de Estágio em Docência para bolsistas CAPES</em>. Acesso em 9 set. 2026.</span><a href="https://www.ufsm.br/">ufsm.br</a></li>
+      <li><span class="rt">UFES. Pró-Reitoria de Pesquisa e Pós-Graduação (PRPPG). <em>Estágios de Docência</em>. Acesso em 9 set. 2026.</span><a href="https://www.ufes.br/">ufes.br</a></li>
+      <li><span class="rt">GOOGLE FOR EDUCATION. <em>Google Sala de Aula</em> (pt). Acesso em 9 set. 2026.</span><a href="https://edu.google.com/">edu.google.com</a></li>
+      <li><span class="rt">H5P. <em>Create, share and reuse interactive HTML5 content in your browser</em>. Licença MIT; H5P.com. Acesso em 9 set. 2026.</span><a href="https://h5p.org/">h5p.org</a></li>
+      <li><span class="rt">THE DOCUMENT FOUNDATION. <em>LibreOffice</em> (26.8). Acesso em 9 set. 2026.</span><a href="https://www.libreoffice.org/">libreoffice.org</a></li>
+      <li><span class="rt">GITHUB COMMUNITY. <em>Thank you for being part of the GitHub Classroom journey</em>, discussão #205975: «GitHub Classroom is now retired…». Acesso em 9 set. 2026.</span><a href="https://github.com/orgs/community/discussions/205975">github.com/orgs/community/discussions/205975</a></li>
+      <li><span class="rt">CREATIVE COMMONS. <em>Atribuição 4.0 Internacional (CC BY 4.0)</em> — deed em português. Acesso em 9 set. 2026.</span><a href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org/licenses/by/4.0</a></li>
+      <li><span class="rt">MATIAS, J. P. M. <em>Plugin Pesquisa MirandasTech</em> — repositório público; scripts <code>plano_de_ensino.py</code>, <code>rubrica.py</code>, <code>turma_progresso.py</code> e skill <code>ensino-pesquisa</code>. Acesso em 9 set. 2026.</span><a href="https://github.com/joaopaulomirandamatias/pesquisa-mirandastech">github.com/joaopaulomirandamatias/pesquisa-mirandastech</a></li>
+      <li><span class="rt">MATIAS, J. P. M. <em>Manuais MirandasTech de pesquisa científica</em> (Metodologia, Uso de IA, Busca, Zotero, PRISMA, Notebook, Bibliometria, Dados, LaTeX, Git, Ciência aberta, Defesa, Orientador, Plugin). CC BY 4.0. Acesso em 9 set. 2026.</span><a href="https://www.mirandastech.com.br/pesquisa">mirandastech.com.br/pesquisa</a></li>
+    </ol>
+    <div class="note rv"><span class="blabel">Sobre as datas</span><p>Versões (LibreOffice 26.8), nomes de páginas, citações literais e o estado do GitHub Classroom foram lidos nas páginas acima em 09/09/2026 e mudam sem aviso. Não há versão do Moodle (moodle.org e docs.moodle.org estavam atrás da Cloudflare nessa data) nem preço do Classroom ou do H5P.com neste manual, porque não foram conferidos.</p></div>
+  </div>
+</section>
+
+<section class="slide" id="s41" data-title="Como citar, uso de IA e licença">
+  <div class="inner">
+    <div class="kicker-part rv">Fechar · último slide<span>7 de 7</span></div>
+    <h2 class="rv">Como citar este manual, declaração de uso de IA e licença</h2>
+    <div class="two rv">
+      <div>
+        <div class="case"><span class="blabel">Como citar</span><p>MATIAS, J. P. M. <em>Manual do professor: ensinar pesquisa com os manuais.</em> MirandasTech, v1.0, set. 2026. CC BY 4.0.</p><span class="src">Este manual: <a href="https://professor.mirandastech.com.br/">professor.mirandastech.com.br</a> (PDF em <a href="https://professor.mirandastech.com.br/manual.pdf">/manual.pdf</a>). Manuais irmãos: <a href="https://orientador.mirandastech.com.br/">orientador.mirandastech.com.br</a> · <a href="https://defesa.mirandastech.com.br/">defesa.mirandastech.com.br</a> · <a href="https://cienciaaberta.mirandastech.com.br/">cienciaaberta.mirandastech.com.br</a> · <a href="https://bibliometria.mirandastech.com.br/">bibliometria.mirandastech.com.br</a> · <a href="https://dados.mirandastech.com.br/">dados.mirandastech.com.br</a> · <a href="https://git.mirandastech.com.br/">git.mirandastech.com.br</a> · <a href="https://latex.mirandastech.com.br/">latex.mirandastech.com.br</a> · <a href="https://busca.mirandastech.com.br/">busca.mirandastech.com.br</a> · <a href="https://prisma.mirandastech.com.br/">prisma.mirandastech.com.br</a> · <a href="https://zotero.mirandastech.com.br/">zotero.mirandastech.com.br</a> · <a href="https://metodologia.mirandastech.com.br/">metodologia.mirandastech.com.br</a> · <a href="https://notebook.mirandastech.com.br/">notebook.mirandastech.com.br</a> · <a href="https://manual.mirandastech.com.br/">manual.mirandastech.com.br</a> · <a href="https://plugin.mirandastech.com.br/">plugin.mirandastech.com.br</a> · hub: <a href="https://www.mirandastech.com.br/pesquisa">mirandastech.com.br/pesquisa</a></span></div>
+        <div class="rule-box"><span class="blabel">Licença</span><p>Conteúdo, capturas e os scripts <code>plano_de_ensino.py</code>, <code>rubrica.py</code> e <code>turma_progresso.py</code>: CC BY 4.0 — use, copie, adapte e redistribua com atribuição. O Moodle é distribuído sob a GPL; o H5P sob MIT; o LibreOffice é código aberto da The Document Foundation. CAPES, CNPq, as universidades citadas, Google, Moodle, H5P, The Document Foundation, GitHub, Springer e os demais órgãos, projetos e serviços mencionados são marcas, órgãos e projetos de terceiros, sem vínculo nem endosso deste manual.</p></div>
+      </div>
+      <div>
+        <div class="note"><span class="blabel">Declaração de uso de IA</span><p>Este manual foi escrito com assistência de IA (Claude, Anthropic) na estruturação, na redação, na automação das capturas de tela e na execução dos scripts, sob as regras do manual de Uso de IA na pesquisa científica. Todos os fatos, citações literais, nomes de páginas, incisos e referências foram conferidos nas fontes indicadas em 09/09/2026, em páginas públicas. Nenhuma captura foi feita com login; nenhuma turma real foi usada — as pastas do painel são fictícias, criadas para a demonstração. O PPC e o regimento de cada instituição prevalecem sobre qualquer sugestão deste manual. Decisões de conteúdo, seleção das fontes e responsabilidade pelo texto são do autor.</p></div>
+        <div class="colophon" style="margin-top:12px;font-size:11px">Sem garantia: interfaces, serviços, normas e versões mudam; cada fato traz a data em que foi verificado. Quando a sua tela — ou o seu PPC — divergir, vale a tela e vale o PPC. Os pesos, o cronograma, as rubricas e o painel são sugestões; a carga horária, o calendário, a avaliação, a recuperação e o estágio de docência seguem o Projeto Pedagógico do Curso, o regimento, a pró-reitoria e, quando houver, a Comissão de Bolsas. A nota é sua e da sua instituição.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var tot = slides.length; document.getElementById('tot').textContent = tot; var ns = document.getElementById('nslides'); if (ns) ns.textContent = tot;
+  var cur = document.getElementById('cur'), prog = document.getElementById('prog');
+  var menu = document.getElementById('menu'), scrim = document.getElementById('scrim'), menubtn = document.getElementById('menubtn');
+
+  /* sumário gerado a partir dos slides */
+  var html = '', grp = '';
+  slides.forEach(function(s, i){
+    var t = s.getAttribute('data-title') || ('Slide ' + (i+1));
+    if (s.classList.contains('divider')) { html += '<div class="grp">' + t + '</div>'; return; }
+    if (s.classList.contains('cover')) { html += '<div class="grp">Início</div>'; }
+    html += '<a href="#' + s.id + '" data-i="' + i + '"><span class="n">' + String(i+1).padStart(2,'0') + '</span><span>' + t + '</span></a>';
+  });
+  document.getElementById('menulist').innerHTML = html;
+  document.getElementById('menuclose').addEventListener('click', function(){ toggleMenu(false); });
+  var links = Array.prototype.slice.call(menu.querySelectorAll('a'));
+  function toggleMenu(open){ menu.classList.toggle('open', open); scrim.classList.toggle('on', open); }
+  menubtn.addEventListener('click', function(){ toggleMenu(!menu.classList.contains('open')); });
+  scrim.addEventListener('click', function(){ toggleMenu(false); });
+  links.forEach(function(a){ a.addEventListener('click', function(){ toggleMenu(false); }); });
+
+  /* slide ativo: contador, progresso, revelação, sumário */
+  var active = 0;
+  function setActive(i){
+    active = i; cur.textContent = i + 1; prog.style.width = ((i+1)/tot*100) + '%';
+    links.forEach(function(a){ a.classList.toggle('on', +a.getAttribute('data-i') === i); });
+    var on = menu.querySelector('a.on'); if (on && menu.classList.contains('open')) on.scrollIntoView({block:'nearest'});
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    slides.forEach(function(s){ io.observe(s); });
+  } else { slides.forEach(function(s){ s.classList.add('in'); }); }
+  /* slide ativo = o que ocupa mais área visível */
+  var ticking = false;
+  function recompute(){
+    ticking = false; var vh = window.innerHeight, best = 0, bi = active;
+    slides.forEach(function(s, i){ var r = s.getBoundingClientRect(); var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0); if (vis > best) { best = vis; bi = i; } });
+    if (bi !== active) setActive(bi);
+  }
+  window.addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(recompute); } }, { passive: true });
+  window.addEventListener('resize', recompute); recompute(); slides[0].classList.add('in');
+
+  /* ajuste de escala: cada slide cabe na tela (como num programa de apresentação) */
+  function fitAll(){
+    if (window.innerWidth <= 900) { slides.forEach(function(s){ var i = s.querySelector('.inner'); if (i) i.style.zoom = ''; s.classList.add('fit'); }); return; }
+    var avail = window.innerHeight - 52;
+    slides.forEach(function(s){
+      var inner = s.querySelector('.inner'); if (!inner || s.classList.contains('divider') || s.classList.contains('cover')) return;
+      inner.style.zoom = '1'; s.classList.remove('fit');
+      var need = inner.scrollHeight; if (need <= avail) { s.classList.add('fit'); return; }
+      var z = Math.max(0.75, avail / need); inner.style.zoom = z.toFixed(3);
+      if (inner.scrollHeight * z <= avail + 2) s.classList.add('fit');
+    });
+  }
+  window.addEventListener('resize', fitAll); window.addEventListener('load', fitAll); fitAll();
+  /* cards expansíveis abrem em janela sobreposta, sem mudar a altura do slide */
+  var modal = document.getElementById('modal'), mbody = document.getElementById('modal-body'), mtitle = document.getElementById('modal-title');
+  function closeModal(){ modal.classList.remove('on'); mbody.innerHTML = ''; }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(ev){ if (ev.target === modal) closeModal(); });
+  document.querySelectorAll('details.more').forEach(function(d){
+    var s = d.querySelector('summary'), body = d.querySelector(':scope > div');
+    s.addEventListener('click', function(ev){
+      if (window.matchMedia('print').matches) return;
+      ev.preventDefault(); d.open = false;
+      mtitle.textContent = s.textContent.replace(/^detalhes\s*—\s*/i, '').trim() || 'detalhes';
+      mbody.innerHTML = body.innerHTML; modal.classList.add('on'); attachCopy(mbody);
+    });
+  });
+  /* botão de copiar em código, terminal e prompt */
+  function attachCopy(root){
+    root.querySelectorAll('.code, .term').forEach(function(box){
+      if (box.querySelector(':scope > .copy')) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'copy'; b.textContent = 'copiar'; b.setAttribute('aria-label', 'Copiar conteúdo');
+      b.addEventListener('click', function(){
+        var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : box.innerText;
+        function done(){ b.textContent = 'copiado ✓'; b.classList.add('ok'); setTimeout(function(){ b.textContent = 'copiar'; b.classList.remove('ok'); }, 1600); }
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt); done(); }); } else { fallback(txt); done(); }
+      });
+      box.appendChild(b);
+    });
+  }
+  function fallback(txt){ var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); }
+  attachCopy(document);
+  /* popover do glossário */
+  var gpop = document.getElementById('gpop'), gcur = null;
+  function showPop(el){ gpop.innerHTML = '<b>' + el.getAttribute('data-t') + '</b>' + el.getAttribute('data-d'); gpop.classList.add('on');
+    var r = el.getBoundingClientRect(), pw = Math.min(340, window.innerWidth - 24); gpop.style.maxWidth = pw + 'px';
+    var left = Math.max(12, Math.min(r.left, window.innerWidth - pw - 12)); gpop.style.left = left + 'px';
+    var ph = gpop.offsetHeight; var top = r.bottom + 8; if (top + ph > window.innerHeight - 8) top = Math.max(8, r.top - ph - 8); gpop.style.top = top + 'px'; gcur = el; }
+  function hidePop(){ gpop.classList.remove('on'); gcur = null; }
+  document.querySelectorAll('.gterm').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ showPop(el); }); el.addEventListener('mouseleave', hidePop);
+    el.addEventListener('focus', function(){ showPop(el); }); el.addEventListener('blur', hidePop);
+    el.addEventListener('click', function(ev){ ev.stopPropagation(); if (gcur === el) hidePop(); else showPop(el); });
+  });
+  document.addEventListener('click', function(){ if (gcur) hidePop(); }); window.addEventListener('scroll', function(){ if (gcur) hidePop(); }, { passive: true });
+
+  function go(i){ i = Math.max(0, Math.min(tot-1, i)); window.scrollTo({ top: slides[i].offsetTop, behavior: 'smooth' }); }
+  document.getElementById('prev').addEventListener('click', function(){ go(active-1); });
+  document.getElementById('next').addEventListener('click', function(){ go(active+1); });
+  document.addEventListener('keydown', function(ev){
+    if (ev.target && /input|textarea|select/i.test(ev.target.tagName)) return;
+    if (ev.key === 'ArrowDown' || ev.key === 'PageDown' || ev.key === ' ' || ev.key === 'ArrowRight') { ev.preventDefault(); go(active+1); }
+    else if (ev.key === 'ArrowUp' || ev.key === 'PageUp' || ev.key === 'ArrowLeft') { ev.preventDefault(); go(active-1); }
+    else if (ev.key === 'Home') { go(0); } else if (ev.key === 'End') { go(tot-1); }
+    else if (ev.key === 'Escape') { toggleMenu(false); closeModal(); }
+  });
+
+  /* checklist — conveniência por leitor, só neste navegador */
+  var KEY = 'mirandastech-professor-checklist-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input[type=checkbox]'));
+  var status = document.getElementById('check-status');
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } }
+  function save(st){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){} }
+  function paint(){ var n = 0; boxes.forEach(function(b){ var it = b.closest('.check-item'); if (b.checked) { n++; it.classList.add('done'); } else { it.classList.remove('done'); } }); if (status) status.textContent = n + ' de ' + boxes.length; }
+  var st = load(); boxes.forEach(function(b){ b.checked = !!st[b.id]; b.addEventListener('change', function(){ var s = load(); s[b.id] = b.checked; save(s); paint(); }); }); paint();
+  var reset = document.getElementById('check-reset'); if (reset) reset.addEventListener('click', function(){ boxes.forEach(function(b){ b.checked = false; }); save({}); paint(); });
+})();
+</script>
+<script>
+(function(){
+  var lb = document.createElement('div'); lb.className = 'lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true');
+  lb.innerHTML = '<span class="lb-hint">clique fora ou Esc para fechar</span><button type="button" class="lb-close" aria-label="Fechar">×</button><figure style="margin:0;display:contents"><img alt=""><figcaption hidden></figcaption></figure>';
+  document.body.appendChild(lb);
+  var img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+  function open(src, alt, text){ img.src = src; img.alt = alt || ''; if (text) { cap.textContent = text; cap.hidden = false; } else { cap.hidden = true; } lb.classList.add('on'); document.body.style.overflow = 'hidden'; }
+  function close(){ lb.classList.remove('on'); img.removeAttribute('src'); document.body.style.overflow = ''; }
+  document.addEventListener('click', function(ev){
+    var t = ev.target;
+    if (t.tagName === 'IMG' && t.closest('.shot')) {
+      var fig = t.closest('figure'), fc = fig && fig.querySelector('figcaption');
+      open(t.currentSrc || t.src, t.alt, fc ? fc.textContent.replace(/\s+/g,' ').trim() : '');
+    }
+  });
+  lb.addEventListener('click', function(ev){ if (ev.target !== img) close(); });
+  document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && lb.classList.contains('on')) close(); });
+})();
+</script>
+
+</body>
+</html>
